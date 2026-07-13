@@ -106,27 +106,49 @@
   }
 
   /* =========================================================
-     5. GRÁFICO DO MOCKUP — Traço e Preenchimento
+     5. GRÁFICO DO MOCKUP — Traço e Preenchimento, com replay
+     toda vez que o card volta a ficar visível na tela (não só
+     uma vez no carregamento da página).
   ========================================================= */
   const dashLine = document.getElementById('dash-line');
   const dashFill = document.querySelector('.dash-chart .dash-fill');
+  const dashChartEl = document.querySelector('.dash-chart');
 
   if (dashLine && dashFill) {
-    const len = dashLine.getTotalLength();
-    dashLine.style.strokeDasharray = len;
-    dashLine.style.strokeDashoffset = reduceMotion ? 0 : len;
-    dashFill.style.opacity = reduceMotion ? 1 : 0; // Esconde o fundo
+    const chartLen = dashLine.getTotalLength();
+    dashLine.style.strokeDasharray = chartLen;
 
-    if (!reduceMotion) {
-      requestAnimationFrame(() => {
-        // Anima a linha
-        dashLine.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1) 0.5s';
+    if (reduceMotion) {
+      dashLine.style.strokeDashoffset = 0;
+      dashFill.style.opacity = 1;
+    } else {
+      function resetChart() {
+        dashLine.style.transition = 'none';
+        dashLine.style.strokeDashoffset = chartLen;
+        dashFill.style.transition = 'none';
+        dashFill.style.opacity = 0;
+      }
+      function playChart() {
+        // força o navegador a "aplicar" o reset acima antes de religar a
+        // transição — sem isso o replay às vezes não anima na 2ª vez.
+        dashLine.getBoundingClientRect();
+        dashLine.style.transition = 'stroke-dashoffset 1.6s cubic-bezier(.16,1,.3,1) 0.3s';
         dashLine.style.strokeDashoffset = 0;
-        
-        // Anima o preenchimento sincronizado com o fim do desenho da linha
-        dashFill.style.transition = 'opacity 1.2s ease 1.7s';
+        dashFill.style.transition = 'opacity 1.2s ease 1.5s';
         dashFill.style.opacity = 1;
-      });
+      }
+      resetChart();
+      if (dashChartEl) {
+        const chartIO = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) playChart();
+            else resetChart();
+          });
+        }, { threshold: 0.4 });
+        chartIO.observe(dashChartEl);
+      } else {
+        requestAnimationFrame(playChart);
+      }
     }
   }
 
@@ -634,4 +656,314 @@
     }, { threshold: 0 });
     waFloatIO.observe(hero);
   }
+
+  /* =========================================================
+     16. BARRAS DE PROGRESSO ANIMADAS — SEÇÃO MÉTODO
+     Cada etapa preenche sua barrinha (25/50/75/100%) ao entrar
+     na tela, reforçando visualmente o avanço do fluxo de trabalho.
+  ========================================================= */
+  document.querySelectorAll('.method-progress-fill').forEach(fillEl => {
+    const target = fillEl.getAttribute('data-progress') || '0';
+    if (reduceMotion) {
+      fillEl.style.width = target + '%';
+      return;
+    }
+    const progressIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          fillEl.style.width = target + '%';
+          progressIO.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.4 });
+    progressIO.observe(fillEl);
+  });
+
+  /* =========================================================
+     17. EFEITO SCRAMBLE/DECODE NOS TÍTULOS DE SEÇÃO
+     Os h2 de cada .section-head "decodificam" letra por letra a
+     partir de caracteres aleatórios ao entrarem na tela — remete
+     a dado bruto virando informação legível, tema central do site.
+  ========================================================= */
+  if (!reduceMotion) {
+    const SCRAMBLE_CHARS = '01#%&$*ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+    function scrambleReveal(el) {
+      const finalText = el.textContent;
+      const chars = finalText.split('');
+      const revealEvery = 2; // frames por caractere revelado (controla a velocidade)
+      let frame = 0;
+
+      function tick() {
+        const revealedCount = Math.floor(frame / revealEvery);
+        let out = '';
+        for (let i = 0; i < chars.length; i++) {
+          out += (chars[i] === ' ' || i < revealedCount)
+            ? chars[i]
+            : SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        }
+        el.textContent = out;
+        frame++;
+        if (revealedCount < chars.length) {
+          requestAnimationFrame(tick);
+        } else {
+          el.textContent = finalText; // garante o texto exato e correto no final
+        }
+      }
+      tick();
+    }
+
+    const scrambleEls = document.querySelectorAll('.section-head h2');
+    if (scrambleEls.length) {
+      const scrambleIO = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            scrambleReveal(entry.target);
+            scrambleIO.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.5 });
+      scrambleEls.forEach(el => scrambleIO.observe(el));
+    }
+  }
+
+  /* =========================================================
+     18. CURSOR COM GLOW — segue o ponteiro pela página inteira
+     Desabilitado em telas de toque e com prefers-reduced-motion.
+  ========================================================= */
+  if (!reduceMotion && !isTouch) {
+    const glow = document.createElement('div');
+    glow.className = 'cursor-glow';
+    glow.setAttribute('aria-hidden', 'true');
+    document.body.appendChild(glow);
+
+    let glowX = window.innerWidth / 2;
+    let glowY = window.innerHeight / 2;
+    let targetX = glowX;
+    let targetY = glowY;
+    let glowRafId = null;
+
+    function glowLoop() {
+      // Suaviza o movimento (lerp) em vez de grudar direto na posição do mouse
+      glowX += (targetX - glowX) * 0.15;
+      glowY += (targetY - glowY) * 0.15;
+      glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+      glowRafId = requestAnimationFrame(glowLoop);
+    }
+
+    window.addEventListener('mousemove', (e) => {
+      targetX = e.clientX;
+      targetY = e.clientY;
+      glow.classList.add('active');
+      if (!glowRafId) glowRafId = requestAnimationFrame(glowLoop);
+    }, { passive: true });
+
+    document.addEventListener('mouseleave', () => glow.classList.remove('active'));
+  }
+
+  /* =========================================================
+     19. QUIZ GAUSS SCAN — teste rápido de maturidade de dados
+     Preview de 4 perguntas do diagnóstico real, 100% no navegador
+     (sem backend): calcula nota por pilar e nota geral, anima um
+     aro circular de resultado e monta um CTA de WhatsApp já
+     contextualizado com o que o visitante respondeu.
+  ========================================================= */
+  (function initMaturityQuiz() {
+    const card = document.getElementById('quiz-card');
+    if (!card) return;
+
+    const QUESTIONS = [
+      {
+        pillar: 'Governança',
+        question: 'Onde ficam os dados principais da sua operação hoje?',
+        options: [
+          { label: 'Espalhados em planilhas e prints, cada um do seu jeito', score: 20 },
+          { label: 'Em planilhas, mas com algum padrão entre a equipe', score: 55 },
+          { label: 'Em um sistema ou painel central, com regras definidas', score: 90 }
+        ]
+      },
+      {
+        pillar: 'Qualidade',
+        question: 'Com que frequência aparece erro, duplicidade ou dado faltando?',
+        options: [
+          { label: 'Toda semana — e corrigir é sempre manual', score: 20 },
+          { label: 'De vez em quando; já existe alguma checagem', score: 55 },
+          { label: 'Raramente — o processo já filtra a maior parte', score: 90 }
+        ]
+      },
+      {
+        pillar: 'Segurança',
+        question: 'Quem tem acesso aos dados mais sensíveis da operação?',
+        options: [
+          { label: 'Praticamente qualquer um que tenha a planilha', score: 20 },
+          { label: 'Um grupo definido, mas sem controle formal', score: 55 },
+          { label: 'Acesso por permissão, com registro de quem viu o quê', score: 90 }
+        ]
+      },
+      {
+        pillar: 'Automação',
+        question: 'Como o relatório mensal chega até quem decide?',
+        options: [
+          { label: 'Alguém monta na mão, copiando e colando', score: 20 },
+          { label: 'Parte automática, parte ainda feita manualmente', score: 55 },
+          { label: 'O painel já atualiza sozinho, sem trabalho manual', score: 90 }
+        ]
+      }
+    ];
+
+    const stepLabel = document.getElementById('quiz-step-label');
+    const dotsWrap = document.getElementById('quiz-dots');
+    const bodyEl = document.getElementById('quiz-body');
+    const resultEl = document.getElementById('quiz-result');
+    const scoreEl = document.getElementById('quiz-score');
+    const gaugeFill = document.getElementById('quiz-gauge-fill');
+    const resultTitle = document.getElementById('quiz-result-title');
+    const resultDesc = document.getElementById('quiz-result-desc');
+    const resultBars = document.getElementById('quiz-result-bars');
+    const ctaLink = document.getElementById('quiz-cta');
+    const restartBtn = document.getElementById('quiz-restart');
+
+    let current = 0;
+    const answers = []; // [{ pillar, score }]
+
+    QUESTIONS.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'quiz-dot' + (i === 0 ? ' active' : '');
+      dot.dataset.dot = String(i);
+      dotsWrap.appendChild(dot);
+    });
+
+    function updateDots() {
+      dotsWrap.querySelectorAll('.quiz-dot').forEach((dot, i) => {
+        dot.classList.toggle('active', i === current);
+        dot.classList.toggle('done', i < current);
+      });
+    }
+
+    function renderQuestion() {
+      const q = QUESTIONS[current];
+      stepLabel.textContent = `Pergunta ${current + 1} de ${QUESTIONS.length}`;
+      updateDots();
+
+      bodyEl.classList.add('fading');
+      window.setTimeout(() => {
+        bodyEl.innerHTML = '';
+
+        const qEl = document.createElement('div');
+        qEl.className = 'quiz-question';
+        qEl.textContent = q.question;
+        bodyEl.appendChild(qEl);
+
+        const optsEl = document.createElement('div');
+        optsEl.className = 'quiz-options';
+        q.options.forEach(opt => {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.className = 'quiz-option';
+          btn.textContent = opt.label;
+          btn.addEventListener('click', () => selectOption(opt));
+          optsEl.appendChild(btn);
+        });
+        bodyEl.appendChild(optsEl);
+
+        bodyEl.classList.remove('fading');
+      }, reduceMotion ? 0 : 220);
+    }
+
+    function selectOption(opt) {
+      answers.push({ pillar: QUESTIONS[current].pillar, score: opt.score });
+      current++;
+      if (current < QUESTIONS.length) {
+        renderQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function scoreLabel(score) {
+      if (score < 40) {
+        return {
+          title: 'Maturidade inicial',
+          desc: 'A operação ainda depende muito de trabalho manual e de conhecimento que fica só na cabeça da equipe. É o ponto de partida mais comum — e o que mais ganha com um diagnóstico estruturado.'
+        };
+      }
+      if (score < 70) {
+        return {
+          title: 'Em desenvolvimento',
+          desc: 'Já existe alguma estrutura, mas ainda com brechas: parte do processo é automática, parte depende de alguém lembrar de fazer. Dá pra consolidar rápido com os ajustes certos.'
+        };
+      }
+      return {
+        title: 'Maturidade consolidada',
+        desc: 'A base já é sólida. Os próximos ganhos vêm de refinar indicadores, automatizar o que ainda é manual e blindar processos críticos.'
+      };
+    }
+
+    function showResult() {
+      const overall = Math.round(answers.reduce((sum, a) => sum + a.score, 0) / answers.length);
+      const label = scoreLabel(overall);
+
+      bodyEl.hidden = true;
+      stepLabel.textContent = 'Resultado';
+      dotsWrap.querySelectorAll('.quiz-dot').forEach(dot => dot.classList.add('done'));
+      resultEl.hidden = false;
+
+      // Calcula o perímetro real do círculo (em vez de um valor fixo),
+      // pra nunca dessincronizar do raio definido no CSS/SVG.
+      const radius = gaugeFill.r.baseVal.value;
+      const circumference = 2 * Math.PI * radius;
+      gaugeFill.style.strokeDasharray = String(circumference);
+      gaugeFill.style.strokeDashoffset = String(circumference);
+
+      resultTitle.textContent = label.title;
+      resultDesc.textContent = label.desc;
+
+      if (reduceMotion) {
+        scoreEl.textContent = overall + '%';
+        gaugeFill.style.strokeDashoffset = String(circumference * (1 - overall / 100));
+      } else {
+        requestAnimationFrame(() => {
+          gaugeFill.style.strokeDashoffset = String(circumference * (1 - overall / 100));
+        });
+        const duration = 1300;
+        const start = performance.now();
+        (function step(now) {
+          const t = Math.min(1, (now - start) / duration);
+          scoreEl.textContent = Math.round(overall * t) + '%';
+          if (t < 1) requestAnimationFrame(step);
+        })(start);
+      }
+
+      resultBars.innerHTML = '';
+      answers.forEach(a => {
+        const row = document.createElement('div');
+        row.className = 'quiz-result-bar-row';
+        row.innerHTML =
+          `<span class="quiz-result-bar-name mono">${a.pillar}</span>` +
+          `<span class="quiz-result-bar-track"><span class="quiz-result-bar-fill"></span></span>`;
+        resultBars.appendChild(row);
+        const fill = row.querySelector('.quiz-result-bar-fill');
+        requestAnimationFrame(() => { fill.style.width = a.score + '%'; });
+      });
+
+      const weakest = answers.reduce((min, a) => (a.score < min.score ? a : min), answers[0]);
+      const waMessage = `Olá, fiz o teste rápido de maturidade de dados no site e tirei ${overall}%. ` +
+        `O ponto mais fraco foi ${weakest.pillar.toLowerCase()}. Quero entender melhor o diagnóstico completo do Gauss Scan.`;
+      ctaLink.href = `https://wa.me/5551993368040?text=${encodeURIComponent(waMessage)}`;
+
+      trackEvent('quiz_complete', { nota_geral: overall, pilar_mais_fraco: weakest.pillar });
+    }
+
+    function resetQuiz() {
+      current = 0;
+      answers.length = 0;
+      resultEl.hidden = true;
+      bodyEl.hidden = false;
+      renderQuestion();
+    }
+
+    restartBtn.addEventListener('click', resetQuiz);
+    ctaLink.addEventListener('click', () => trackEvent('quiz_whatsapp_click', {}));
+    renderQuestion();
+  })();
 })();

@@ -239,20 +239,70 @@
       <div class="method-list reveal">
         <div class="method-item">
           <span class="step">01</span>
-          <div><h3>Diagnóstico</h3><p>Mapeamento dos dados existentes e dos pontos cegos operacionais — o que já é coletado e o que ainda falta.</p></div>
+          <div>
+            <h3>Diagnóstico</h3>
+            <p>Mapeamento dos dados existentes e dos pontos cegos operacionais — o que já é coletado e o que ainda falta.</p>
+            <div class="method-progress"><span class="method-progress-fill" data-progress="25"></span></div>
+          </div>
         </div>
         <div class="method-item">
           <span class="step">02</span>
-          <div><h3>Estrutura</h3><p>Organização das fontes, definição de indicadores e arquitetura do painel ou da automação.</p></div>
+          <div>
+            <h3>Estrutura</h3>
+            <p>Organização das fontes, definição de indicadores e arquitetura do painel ou da automação.</p>
+            <div class="method-progress"><span class="method-progress-fill" data-progress="50"></span></div>
+          </div>
         </div>
         <div class="method-item">
           <span class="step">03</span>
-          <div><h3>Entrega</h3><p>Dashboard, relatório ou automação, testado em condição real e documentado para manutenção futura.</p></div>
+          <div>
+            <h3>Entrega</h3>
+            <p>Dashboard, relatório ou automação, testado em condição real e documentado para manutenção futura.</p>
+            <div class="method-progress"><span class="method-progress-fill" data-progress="75"></span></div>
+          </div>
         </div>
         <div class="method-item">
           <span class="step">04</span>
-          <div><h3>Acompanhamento</h3><p>Ajustes feitos com base no uso real do dia a dia, não apenas na maquete apresentada na entrega.</p></div>
+          <div>
+            <h3>Acompanhamento</h3>
+            <p>Ajustes feitos com base no uso real do dia a dia, não apenas na maquete apresentada na entrega.</p>
+            <div class="method-progress"><span class="method-progress-fill" data-progress="100"></span></div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="teste-maturidade" class="quiz-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin-bottom:14px;">Teste rápido · 4 perguntas</span>
+      <h2>Qual a maturidade de dados da sua operação?</h2>
+      <p>Um preview de 30 segundos do que o Gauss Scan analisa a fundo, em seis pilares. Sem cadastro, sem compromisso.</p>
+    </div>
+    <div class="quiz-card reveal tilt" id="quiz-card">
+      <div class="quiz-head">
+        <span class="dash-label" id="quiz-step-label">Pergunta 1 de 4</span>
+        <div class="quiz-dots" id="quiz-dots" aria-hidden="true"></div>
+      </div>
+      <div class="quiz-body" id="quiz-body"></div>
+      <div class="quiz-result" id="quiz-result" hidden>
+        <div class="quiz-gauge">
+          <svg viewBox="0 0 120 120">
+            <circle class="quiz-gauge-track" cx="60" cy="60" r="52"/>
+            <circle class="quiz-gauge-fill" id="quiz-gauge-fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="quiz-gauge-label">
+            <span class="quiz-gauge-num" id="quiz-score">0%</span>
+            <span class="quiz-gauge-txt">maturidade</span>
+          </div>
+        </div>
+        <h3 id="quiz-result-title">Resultado</h3>
+        <p id="quiz-result-desc"></p>
+        <div class="quiz-result-bars" id="quiz-result-bars"></div>
+        <a href="#" class="btn btn-primary magnetic" id="quiz-cta" target="_blank" rel="noopener">Quero o diagnóstico completo →</a>
+        <button class="quiz-restart" id="quiz-restart" type="button">Refazer teste</button>
       </div>
     </div>
   </div>
