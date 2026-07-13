@@ -494,6 +494,7 @@
       if (successName) successName.textContent = name.split(' ')[0];
 
       leadForm.classList.add('sent');
+      trackEvent('lead_submit', { tem_desafio: !!challenge });
       window.open(waUrl, '_blank', 'noopener');
     });
 
@@ -544,5 +545,78 @@
         parallaxTicking = true;
       }
     }, { passive: true });
+  }
+
+  /* =========================================================
+     14. RASTREAMENTO DE EVENTOS (GA4 / Meta Pixel — plug-and-play)
+     Não faz nada sozinho: só dispara de verdade quando você
+     instalar o gtag.js (GA4) e/ou o Pixel da Meta na página.
+     Até lá, os eventos ficam disponíveis no console pra você
+     testar (?debug=1 na URL) e comparar variantes do outreach.
+  ========================================================= */
+  function trackEvent(name, params) {
+    params = params || {};
+    try {
+      if (typeof window.gtag === 'function') window.gtag('event', name, params);
+      if (typeof window.fbq === 'function') window.fbq('trackCustom', name, params);
+      const debugOn = window.location.search.indexOf('debug=1') !== -1 || window.location.hostname === 'localhost';
+      if (debugOn) console.log('[gauss:event]', name, params);
+    } catch (err) { /* provedor de analytics indisponível — não deve quebrar a página */ }
+  }
+  window.gaussTrackEvent = trackEvent; // acessível no console pra debug manual
+
+  // Clique em qualquer CTA que leva ao WhatsApp — identifica de qual
+  // seção veio, útil pra saber qual bloco da página realmente converte.
+  document.querySelectorAll('a[href*="wa.me"]').forEach(link => {
+    link.addEventListener('click', () => {
+      const section = link.closest('section, header, footer');
+      trackEvent('whatsapp_click', {
+        origem: (section && section.id) || 'wa_float',
+        rotulo: link.textContent.trim().slice(0, 60)
+      });
+    });
+  });
+
+  // Profundidade de scroll — sinaliza engajamento real com o conteúdo,
+  // não só visita rápida que sai no primeiro dobra.
+  (function trackScrollDepth() {
+    const marks = [25, 50, 75, 100];
+    const fired = new Set();
+    let depthTicking = false;
+    function checkDepth() {
+      const doc = document.documentElement;
+      const scrollTop = doc.scrollTop || document.body.scrollTop;
+      const scrollH = (doc.scrollHeight - doc.clientHeight) || 1;
+      const pct = (scrollTop / scrollH) * 100;
+      marks.forEach(m => {
+        if (pct >= m && !fired.has(m)) {
+          fired.add(m);
+          trackEvent('scroll_depth', { porcentagem: m });
+        }
+      });
+      depthTicking = false;
+    }
+    window.addEventListener('scroll', () => {
+      if (!depthTicking) {
+        requestAnimationFrame(checkDepth);
+        depthTicking = true;
+      }
+    }, { passive: true });
+  })();
+
+  /* =========================================================
+     15. BOTÃO FLUTUANTE DO WHATSAPP
+     Aparece depois que a hero sai da tela, some quando o
+     visitante volta pro topo — evita competir com os CTAs
+     principais da primeira dobra.
+  ========================================================= */
+  const waFloat = document.getElementById('wa-float');
+  if (waFloat && hero) {
+    const waFloatIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        waFloat.classList.toggle('visible', !entry.isIntersecting);
+      });
+    }, { threshold: 0 });
+    waFloatIO.observe(hero);
   }
 })();
