@@ -130,20 +130,31 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
   align-items:center;
 }
 @media(max-width:900px){
+  .hero{
+    min-height:auto;
+    overflow:visible;
+    padding-top:96px;
+    padding-bottom:56px;
+  }
   .hero-inner{
     grid-template-columns:1fr;
-    gap:40px;
+    gap:36px;
   }
   .hero-visual{
-    /* Mantém o visual do hero visível no mobile como uma marca de água */
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%) scale(0.65);
-    opacity:0.15;
-    pointer-events:none;
-    z-index:-1;
+    height:auto;
+    max-width:420px;
+    width:100%;
+    margin:0 auto;
   }
+  .scroll-cue{display:none;}
+}
+@media(max-width:480px){
+  .dash-main{padding:20px 18px 16px;}
+  .dash-kpis{gap:16px;margin-bottom:16px;}
+  .dash-kpi .val{font-size:19px;}
+  .dash-chart{height:80px;margin-bottom:16px;}
+  .dash-pillars{margin-bottom:14px;}
+  .pillar-name{width:64px;font-size:10.5px;}
 }
 .eyebrow{
   display:inline-flex;align-items:center;gap:8px;

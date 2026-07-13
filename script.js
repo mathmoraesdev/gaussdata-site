@@ -542,9 +542,8 @@
      13. PARALLAX SUTIL NO VISUAL DO HERO (scroll)
   ========================================================= */
   const heroVisual = document.querySelector('.hero-visual');
-  // Só roda em telas largas: abaixo de 900px o CSS usa .hero-visual como
-  // marca d'água posicionada via transform, e sobrescrever isso via JS
-  // quebraria aquele layout.
+  // Só roda em telas largas: no mobile o card do dashboard fica em fluxo
+  // normal (visível, sem parallax) por simplicidade e performance.
   const isWideScreen = window.matchMedia('(min-width: 900px)').matches;
   if (heroVisual && hero && !reduceMotion && isWideScreen) {
     let parallaxTicking = false;
