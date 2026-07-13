@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gauss Data — Consultoria em Dados</title>
+<meta name="description" content="A Gauss Data transforma planilhas soltas e sistemas dispersos em dashboards, diagnósticos e automações de dados para operações do Rio Grande do Sul.">
+<meta name="theme-color" content="#050810">
+<link rel="canonical" href="https://gaussdata.com.br/">
+
+<!-- Open Graph / preview em WhatsApp e Instagram -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:title" content="Gauss Data — Consultoria em Dados">
+<meta property="og:description" content="Do caos operacional ao dado que decide: dashboards, diagnósticos e automações construídos por quem também vive a rotina operacional.">
+<meta property="og:url" content="https://gaussdata.com.br/">
+<meta property="og:image" content="https://gaussdata.com.br/og-cover.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232461ff'/%3E%3Cstop offset='100%25' stop-color='%2335d0f5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='matrix(0.13986,0,0,-0.13986,-3.2867,99.3007)'%3E%3Cpath d='M528 480Q509 515 473.5 533.5Q438 552 390 552Q307 552 257.0 497.5Q207 443 207 352Q207 255 259.5 200.5Q312 146 404 146Q467 146 510.5 178.0Q554 210 574 270H357V396H729V237Q710 173 664.5 118.0Q619 63 549.0 29.0Q479 -5 391 -5Q287 -5 205.5 40.5Q124 86 78.5 167.0Q33 248 33 352Q33 456 78.5 537.5Q124 619 205.0 664.5Q286 710 390 710Q516 710 602.5 649.0Q689 588 717 480Z' fill='url(%23g)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Gauss Data",
+  "description": "Consultoria em dados: dashboards, diagnósticos e automações para operações críticas.",
+  "areaServed": "Rio Grande do Sul, Brasil",
+  "telephone": "+5551993368040",
+  "sameAs": ["https://instagram.com/gaussdata"]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type":"Question","name":"O que é o Gauss Scan e quanto custa?","acceptedAnswer":{"@type":"Answer","text":"É um diagnóstico gratuito de maturidade de dados em seis pilares, com relatório em PDF, sem custo e sem compromisso."}},
+    {"@type":"Question","name":"Preciso ter um time de TI para contratar a Gauss Data?","acceptedAnswer":{"@type":"Answer","text":"Não. A Gauss Data cuida da estrutura, automação e manutenção; a maioria dos clientes ainda opera majoritariamente em planilhas."}},
+    {"@type":"Question","name":"Quanto tempo leva do diagnóstico até o painel funcionando?","acceptedAnswer":{"@type":"Answer","text":"O fluxo completo costuma ser conduzido em semanas, com prazo definido após entender as fontes de dados do cliente."}},
+    {"@type":"Question","name":"Meus dados ficam seguros?","acceptedAnswer":{"@type":"Answer","text":"Sim. Segurança e boas práticas fazem parte do processo desde o diagnóstico inicial."}},
+    {"@type":"Question","name":"Depois da entrega, quem dá manutenção no painel?","acceptedAnswer":{"@type":"Answer","text":"A Gauss Data oferece um plano de suporte mensal recorrente, ou documenta tudo para manutenção interna."}}
+  ]
+}
+</script>
+</head>
+<body>
+<a href="#main" class="skip-link">Pular para o conteúdo</a>
+
+<div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
+
+<!-- Logo compartilhado via <symbol>, referenciado com <use> (sem base64) -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="gauss-grad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#2461ff"/>
+      <stop offset="100%" stop-color="#35d0f5"/>
+    </linearGradient>
+    <symbol id="gauss-logo" viewBox="0 0 100 100">
+      <g transform="matrix(0.13986,0,0,-0.13986,-3.2867,99.3007)">
+        <path d="M528 480Q509 515 473.5 533.5Q438 552 390 552Q307 552 257.0 497.5Q207 443 207 352Q207 255 259.5 200.5Q312 146 404 146Q467 146 510.5 178.0Q554 210 574 270H357V396H729V237Q710 173 664.5 118.0Q619 63 549.0 29.0Q479 -5 391 -5Q287 -5 205.5 40.5Q124 86 78.5 167.0Q33 248 33 352Q33 456 78.5 537.5Q124 619 205.0 664.5Q286 710 390 710Q516 710 602.5 649.0Q689 588 717 480Z" fill="url(#gauss-grad)"/>
+      </g>
+      <g opacity="0.5" stroke="#bfe9ff" stroke-width="1" fill="#bfe9ff">
+        <line x1="68.9" y1="33.6" x2="72.9" y2="8.6"/>
+        <line x1="28.2" y1="56.7" x2="13" y2="23.1"/>
+        <line x1="81.5" y1="85.3" x2="19.7" y2="84.6"/>
+        <circle cx="68.9" cy="33.6" r="2.8"/>
+        <circle cx="72.9" cy="8.6" r="2.8"/>
+        <circle cx="13" cy="23.1" r="2.8"/>
+        <circle cx="19.7" cy="84.6" r="2.8"/>
+        <circle cx="81.5" cy="85.3" r="2.8"/>
+      </g>
+    </symbol>
+  </defs>
+</svg>
+
+<header id="site-header">
+  <nav>
+    <div class="brand">
+      <svg><use href="#gauss-logo"/></svg>
+      <span>GAUSS DATA</span>
+    </div>
+    <div class="nav-links" id="nav-links">
+      <a href="#servicos" data-nav="servicos">Serviços</a>
+      <a href="#metodo" data-nav="metodo">Método</a>
+      <a href="#resultados" data-nav="resultados">Resultados</a>
+      <a href="#faq" data-nav="faq">FAQ</a>
+      <a href="#contato" data-nav="contato">Contato</a>
+    </div>
+    <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20Gauss%20Data" class="nav-cta magnetic" target="_blank" rel="noopener">Falar no WhatsApp</a>
+  </nav>
+</header>
+
+<section class="hero" id="main">
+  <canvas id="network-canvas"></canvas>
+  <div class="hero-spotlight" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow load-in" style="--d:0">Consultoria em dados · Operações críticas</div>
+      <h1 class="load-in" style="--d:1">Do caos operacional<br>ao <span class="grad">dado que decide.</span></h1>
+      <p class="load-in" style="--d:2">A Gauss Data transforma planilhas soltas e sistemas dispersos em dashboards, diagnósticos e automações — construídos por quem também vive a rotina operacional, não só por quem lê o relatório no fim do mês.</p>
+      <div class="cta-row load-in" style="--d:3">
+        <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20Gauss%20Data" class="btn btn-primary magnetic" target="_blank" rel="noopener">Falar no WhatsApp →</a>
+        <a href="#scan" class="btn btn-ghost magnetic">Ver o Gauss Scan</a>
+      </div>
+    </div>
+    <div class="hero-visual load-in" style="--d:4" aria-hidden="true">
+      <div class="dash-card dash-main tilt">
+        <div class="dash-head">
+          <span class="dash-label">Painel · Ocorrências</span>
+          <div class="dash-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="dash-kpis">
+          <div class="dash-kpi"><div class="val">1.284</div><div class="lbl">Registros/mês</div></div>
+          <div class="dash-kpi"><div class="val cyan">98,6%</div><div class="lbl">Integridade</div></div>
+        </div>
+        <div class="dash-chart">
+          <svg viewBox="0 0 260 90" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#35d0f5" stop-opacity="0.35"/>
+                <stop offset="100%" stop-color="#35d0f5" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+            <path d="M0,64 L26,52 L52,58 L78,34 L104,40 L130,22 L156,30 L182,14 L208,20 L234,8 L260,16" fill="none" stroke="#35d0f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" id="dash-line"/>
+            <path class="dash-fill" d="M0,64 L26,52 L52,58 L78,34 L104,40 L130,22 L156,30 L182,14 L208,20 L234,8 L260,16 L260,90 L0,90 Z" fill="url(#chartFill)"/>
+          </svg>
+        </div>
+        <div class="dash-pillars">
+          <div class="lbl">Pilares · Gauss Scan</div>
+          <div class="pillar-row"><span class="pillar-name mono">Governança</span><span class="bar-track"><span class="bar-fill" style="width:82%"></span></span></div>
+          <div class="pillar-row"><span class="pillar-name mono">Qualidade</span><span class="bar-track"><span class="bar-fill" style="width:64%"></span></span></div>
+          <div class="pillar-row"><span class="pillar-name mono">Segurança</span><span class="bar-track"><span class="bar-fill" style="width:91%"></span></span></div>
+        </div>
+        <div class="dash-status">
+          <span class="txt"><span class="dot"></span>Sincronizado agora</span>
+          <span class="txt mono">v2.3</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-cue"><span>ROLAR</span><span class="line"></span></div>
+</section>
+
+<section class="proof-strip" aria-label="Resultados em produção">
+  <div class="wrap proof-inner">
+    <div class="proof-item"><span class="proof-num mono" data-counter data-target="6" data-suffix="+">0</span><span class="proof-lbl">painéis em produção</span></div>
+    <div class="proof-item"><span class="proof-num mono">2022–2026</span><span class="proof-lbl">dados SSP/RS tratados</span></div>
+    <div class="proof-item"><span class="proof-num mono">GCM</span><span class="proof-lbl">São Leopoldo, operação real</span></div>
+  </div>
+</section>
+
+<section id="porque" class="mesh-1">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Feita para quem lida com dados de verdade, todo dia.</h2>
+      <p>Não é consultoria de slide. É construída na prática de quem trata dado bruto, prazo curto e sistema que trava.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card feature tilt">
+        <span class="num-bg" aria-hidden="true">01</span>
+        <span class="num mono">01</span>
+        <h3>Experiência de campo</h3>
+        <p>Quem monta o dashboard também mexe na planilha de ocorrência todo dia. O que entra no relatório é o que realmente importa na rotina operacional — não o que parece bem numa demonstração.</p>
+      </div>
+      <div class="why-card tilt">
+        <span class="num-bg" aria-hidden="true">02</span>
+        <span class="num mono">02</span>
+        <h3>Dado como sistema</h3>
+        <p>Nada de arquivo avulso. Cada entrega se conecta a um fluxo, da coleta ao relatório, sem retrabalho manual.</p>
+      </div>
+      <div class="why-card tilt">
+        <span class="num-bg" aria-hidden="true">03</span>
+        <span class="num mono">03</span>
+        <h3>Segurança desde o início</h3>
+        <p>Diagnóstico de maturidade e boas práticas fazem parte do processo desde o primeiro dia, não são um item à parte.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="servicos">
+  <div class="wrap">
+    <div class="section-head right reveal">
+      <h2>O que a Gauss Data faz</h2>
+      <p>Quatro frentes que cobrem o ciclo inteiro do dado: do diagnóstico à decisão.</p>
+    </div>
+    <div class="service-grid">
+      <div class="service-card wide reveal tilt scan-card">
+        <div class="scan-card-body">
+          <svg class="service-icon" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="#35d0f5" stroke-width="1.6"/><path d="M20 20l-4.5-4.5" stroke="#35d0f5" stroke-width="1.6" stroke-linecap="round"/></svg>
+          <h3>Gauss Scan</h3>
+          <p>Diagnóstico estruturado de maturidade de dados em seis pilares, com relatório em PDF pronto para apresentar à gestão.</p>
+          <span class="tag">Produto principal</span>
+        </div>
+        <div class="scan-report" aria-hidden="true">
+          <div class="scan-report-head"><span></span><span></span><span></span></div>
+          <div class="scan-score">
+            <svg viewBox="0 0 60 60">
+              <circle cx="30" cy="30" r="26" fill="none" stroke="rgba(255,255,255,0.08)" stroke-width="5"/>
+              <circle cx="30" cy="30" r="26" fill="none" stroke="#35d0f5" stroke-width="5" stroke-linecap="round" stroke-dasharray="163" stroke-dashoffset="34" transform="rotate(-90 30 30)"/>
+            </svg>
+            <span class="scan-score-val">79</span>
+          </div>
+          <div class="scan-report-line" style="width:88%"></div>
+          <div class="scan-report-line" style="width:64%"></div>
+          <div class="scan-report-line" style="width:72%"></div>
+        </div>
+      </div>
+      <div class="service-card reveal tilt">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><rect x="3" y="12" width="4" height="9" rx="1" stroke="#35d0f5" stroke-width="1.6"/><rect x="10" y="6" width="4" height="15" rx="1" stroke="#35d0f5" stroke-width="1.6"/><rect x="17" y="9" width="4" height="12" rx="1" stroke="#35d0f5" stroke-width="1.6"/></svg>
+        <h3>Dashboards operacionais</h3>
+        <p>Painéis públicos e internos, atualizados em tempo real, para acompanhar indicadores que movem decisões.</p>
+      </div>
+      <div class="service-card reveal tilt">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z" stroke="#35d0f5" stroke-width="1.6" stroke-linejoin="round"/></svg>
+        <h3>Segurança &amp; auditoria</h3>
+        <p>Análise de vulnerabilidades e verificação de exposição de dados em sistemas públicos e internos.</p>
+      </div>
+      <div class="service-card wide reveal tilt">
+        <svg class="service-icon" viewBox="0 0 24 24" fill="none"><path d="M4 12a8 8 0 0114-5.3M20 12a8 8 0 01-14 5.3" stroke="#35d0f5" stroke-width="1.6" stroke-linecap="round"/><path d="M18 4v4h-4M6 20v-4h4" stroke="#35d0f5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <h3>Automação de relatórios</h3>
+        <p>Scripts que eliminam retrabalho manual: geração de relatórios, tratamento de planilhas, integração entre fontes distintas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="metodo" class="mesh-2">
+  <div class="wrap">
+    <div class="method-wrap">
+      <div class="section-head reveal" style="margin-bottom:0;">
+        <h2>Como trabalhamos</h2>
+        <p>Um fluxo direto, sem etapa desnecessária entre o problema e a entrega.</p>
+      </div>
+      <div class="method-list reveal">
+        <div class="method-item">
+          <span class="step">01</span>
+          <div><h3>Diagnóstico</h3><p>Mapeamento dos dados existentes e dos pontos cegos operacionais — o que já é coletado e o que ainda falta.</p></div>
+        </div>
+        <div class="method-item">
+          <span class="step">02</span>
+          <div><h3>Estrutura</h3><p>Organização das fontes, definição de indicadores e arquitetura do painel ou da automação.</p></div>
+        </div>
+        <div class="method-item">
+          <span class="step">03</span>
+          <div><h3>Entrega</h3><p>Dashboard, relatório ou automação, testado em condição real e documentado para manutenção futura.</p></div>
+        </div>
+        <div class="method-item">
+          <span class="step">04</span>
+          <div><h3>Acompanhamento</h3><p>Ajustes feitos com base no uso real do dia a dia, não apenas na maquete apresentada na entrega.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resultados" class="case-section mesh-1">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin-bottom:14px;">Caso real · Operação em produção</span>
+      <h2>Um painel usado todo dia, não só na apresentação.</h2>
+      <p>A validação de qualquer diagnóstico é o uso contínuo depois da entrega. Este é um exemplo do que sai do papel.</p>
+    </div>
+    <div class="case-card reveal tilt">
+      <div class="case-card-main">
+        <span class="case-tag mono">GCM São Leopoldo</span>
+        <h3>Painel de ocorrências, do registro bruto à decisão operacional</h3>
+        <p class="case-desc">A Guarda Civil Municipal de São Leopoldo tratava ocorrências em planilhas soltas, sem visão consolidada por período, bairro ou tipo. A Gauss Data estruturou os dados históricos (2022–2026, incluindo bases da SSP/RS) em um painel público e outro interno, atualizados automaticamente — substituindo a compilação manual mensal por leitura direta do indicador.</p>
+        <!-- CONFIRMAR: "6+" já é real (proof-strip). O "98%" de integridade abaixo é ILUSTRATIVO — troque pelo número real antes de publicar, ou remova o card. Nunca publique estatística de case sem confirmar a fonte. -->
+        <div class="case-stats">
+          <div class="case-stat">
+            <span class="case-stat-val mono" data-counter data-target="6" data-suffix="+">0</span>
+            <span class="case-stat-lbl">painéis em produção</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val mono">2022–2026</span>
+            <span class="case-stat-lbl">de dados SSP/RS tratados</span>
+          </div>
+          <div class="case-stat">
+            <span class="case-stat-val mono" data-counter data-target="98" data-suffix="%">0</span>
+            <span class="case-stat-lbl">de integridade nos registros</span>
+          </div>
+        </div>
+        <!-- SUBSTITUIR: quando tiver um depoimento real do gestor da GCM, trocar o bloco abaixo por uma citação direta e atribuída -->
+        <p class="case-note">* Case documentado a partir de operação real. Depoimento do gestor responsável pode ser incluído aqui mediante autorização.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <h2>Perguntas frequentes</h2>
+      <p>O que quem está decidindo pela Gauss Data mais pergunta antes de fechar.</p>
+    </div>
+    <div class="faq-list reveal" id="faq-list">
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>O que é o Gauss Scan e quanto custa?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <p>É um diagnóstico gratuito de maturidade de dados em seis pilares, feito a partir de informações que você mesmo preenche. Você recebe um relatório em PDF com nota, pontos de atenção e recomendações — sem custo e sem compromisso. A partir dele, propomos os próximos passos se fizer sentido para sua operação.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>Preciso ter um time de TI para contratar a Gauss Data?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <p>Não. A maioria dos nossos clientes ainda opera majoritariamente em planilhas e não tem uma equipe técnica dedicada. Cuidamos da estrutura, da automação e da manutenção — sua equipe usa o painel, não precisa mantê-lo.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>Quanto tempo leva do diagnóstico até o painel funcionando?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <p>Varia com a complexidade das fontes de dados, mas o fluxo — diagnóstico, estrutura, entrega, acompanhamento — costuma ser conduzido em semanas, não meses. Definimos um prazo real na conversa inicial, depois de entender suas fontes.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>Meus dados ficam seguros?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <p>Sim. Segurança e boas práticas fazem parte do processo desde o diagnóstico inicial, não são um item avulso adicionado depois. Analisamos exposição de dados e vulnerabilidades como parte padrão da entrega.</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          <span>Depois da entrega, quem dá manutenção no painel?</span>
+          <span class="faq-icon" aria-hidden="true"></span>
+        </button>
+        <div class="faq-a">
+          <p>Oferecemos um plano de suporte mensal recorrente para ajustes, novos indicadores e manutenção contínua. Você também pode optar por assumir a manutenção internamente — documentamos tudo para isso.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-final" id="scan">
+  <div class="wrap">
+    <div class="cta-final-grid">
+      <div class="reveal">
+        <h2>Pronto para ver seus dados com clareza?</h2>
+        <p>Comece pelo Gauss Scan — um diagnóstico direto da maturidade de dados da sua operação, com relatório em PDF. Deixe seu contato e falamos no WhatsApp com o diagnóstico já direcionado pro seu caso.</p>
+        <div class="cta-row">
+          <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20pelo%20Gauss%20Scan" class="btn btn-ghost magnetic">Prefiro chamar direto →</a>
+        </div>
+      </div>
+      <form class="lead-form reveal tilt" id="lead-form" novalidate>
+        <div class="lead-form-head">
+          <span class="dash-label">Fale com a Gauss Data</span>
+          <div class="dash-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="lead-field">
+          <label for="lead-name">Nome</label>
+          <input type="text" id="lead-name" name="name" autocomplete="name" placeholder="Seu nome" required>
+          <span class="lead-error" data-error-for="lead-name"></span>
+        </div>
+        <div class="lead-field">
+          <label for="lead-phone">WhatsApp</label>
+          <input type="tel" id="lead-phone" name="phone" autocomplete="tel" placeholder="(51) 9XXXX-XXXX" required>
+          <span class="lead-error" data-error-for="lead-phone"></span>
+        </div>
+        <div class="lead-field">
+          <label for="lead-challenge">Maior desafio com dados hoje <span class="opt">(opcional)</span></label>
+          <textarea id="lead-challenge" name="challenge" rows="2" placeholder="Ex: planilhas soltas, relatório manual, sem visão em tempo real..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary magnetic lead-submit">
+          <span class="lead-submit-label">Quero meu diagnóstico →</span>
+        </button>
+        <p class="lead-hint">Ao enviar, abrimos o WhatsApp com sua mensagem pronta — nada é enviado sem você confirmar.</p>
+        <div class="lead-success">
+          <div class="lead-success-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#35d0f5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>Prontinho, <span id="lead-success-name">tudo certo</span>!</h4>
+          <p>Abrimos o WhatsApp numa nova aba com sua mensagem pronta. Se não abriu, <a href="#" id="lead-fallback-link" target="_blank" rel="noopener" style="color:var(--cyan-bright);">clique aqui</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer id="contato">
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-about">
+        <div class="footer-brand">
+          <svg><use href="#gauss-logo"/></svg>
+          <span>GAUSS DATA</span>
+        </div>
+        <p>Consultoria em dados para operações que não podem parar. Diagnóstico, dashboards e automação, construídos por quem vive a rotina.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navegação</h4>
+        <a href="#servicos">Serviços</a>
+        <a href="#metodo">Método</a>
+        <a href="#scan">Gauss Scan</a>
+      </div>
+      <div class="footer-col">
+        <h4>Contato</h4>
+        <a href="https://instagram.com/gaussdata" target="_blank" rel="noopener">@gaussdata</a>
+        <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20Gauss%20Data" target="_blank" rel="noopener">WhatsApp</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="copy mono">© 2026 Gauss Data</span>
+      <span class="copy">Rio Grande do Sul, Brasil</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
