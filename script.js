@@ -981,19 +981,9 @@
   const screenLightboxClose = document.getElementById('screen-lightbox-close');
   let lastLightboxTrigger = null;
 
-  // Trava o pinch-zoom nativo da página enquanto o popup está aberto —
-  // é isso que causava a "sobra" de fundo ao afastar os dedos além da
-  // imagem. O zoom dentro do popup passa a ser só o customizado abaixo.
-  function lockViewportZoom(lock) {
-    const meta = document.querySelector('meta[name="viewport"]');
-    if (!meta) return;
-    if (lock) {
-      if (!meta.dataset.baseContent) meta.dataset.baseContent = meta.getAttribute('content') || '';
-      meta.setAttribute('content', meta.dataset.baseContent + ', maximum-scale=1, user-scalable=no');
-    } else if (meta.dataset.baseContent) {
-      meta.setAttribute('content', meta.dataset.baseContent);
-    }
-  }
+  // O pinch-zoom nativo do navegador fica desligado no site inteiro
+  // (ver <meta name="viewport"> no <head>), então o único zoom possível
+  // no popup é o customizado abaixo — não tem como "sair" dele.
 
   // Pinça/arrasto customizado dentro da imagem — só permite ampliar
   // (scale >= 1); nunca deixa "tirar" o zoom a ponto de sobrar fundo.
@@ -1087,7 +1077,6 @@
     screenLightbox.classList.add('active');
     screenLightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
-    lockViewportZoom(true);
     screenLightboxClose?.focus();
   }
   function closeScreenLightbox() {
@@ -1095,7 +1084,6 @@
     screenLightbox.classList.remove('active');
     screenLightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
-    lockViewportZoom(false);
     lbReset();
     lastLightboxTrigger?.focus();
   }
