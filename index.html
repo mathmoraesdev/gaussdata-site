@@ -142,7 +142,6 @@
       </div>
     </div>
   </div>
-  <div class="scroll-cue"><span>ROLAR</span><span class="line"></span></div>
 </section>
 
 <section class="proof-strip" aria-label="Resultados em produção">
@@ -311,118 +310,339 @@
 <section id="resultados" class="case-section mesh-1">
   <div class="wrap">
     <div class="section-head reveal">
-      <span class="eyebrow" style="margin-bottom:14px;">Caso real · Operação em produção</span>
-      <h2>Um painel usado todo dia, não só na apresentação.</h2>
-      <p>A validação de qualquer diagnóstico é o uso contínuo depois da entrega. Este é um exemplo do que sai do papel.</p>
-    </div>
-    <div class="case-card reveal tilt">
-      <div class="case-card-main">
-        <span class="case-tag mono">GCM São Leopoldo</span>
-        <h3>Painel de ocorrências, do registro bruto à decisão operacional</h3>
-        <p class="case-desc">A Guarda Civil Municipal de São Leopoldo tratava ocorrências em planilhas soltas, sem visão consolidada por período, bairro ou tipo. A Gauss Data estruturou os dados históricos (2022–2026, incluindo bases da SSP/RS) em um painel público e outro interno, atualizados automaticamente — substituindo a compilação manual mensal por leitura direta do indicador.</p>
-        <!-- CONFIRMAR: "6+" já é real (proof-strip) e "2022–2026" também. Removido o % de integridade
-             não verificado — se algum dia tiver o número real auditado, pode voltar aqui. -->
-        <div class="case-stats">
-          <div class="case-stat">
-            <span class="case-stat-val mono" data-counter data-target="6" data-suffix="+">0</span>
-            <span class="case-stat-lbl">painéis em produção</span>
-          </div>
-          <div class="case-stat">
-            <span class="case-stat-val mono">2022–2026</span>
-            <span class="case-stat-lbl">de dados SSP/RS tratados</span>
-          </div>
-          <div class="case-stat">
-            <span class="case-stat-val mono" style="font-size:15px;line-height:1.3;">Público &amp; interno</span>
-            <span class="case-stat-lbl">painéis em operação simultânea</span>
-          </div>
-        </div>
-        <!-- SUBSTITUIR: quando tiver um depoimento real do gestor da GCM, trocar o bloco abaixo por uma citação direta e atribuída -->
-        <p class="case-note">* Case documentado a partir de operação real. Depoimento do gestor responsável pode ser incluído aqui mediante autorização.</p>
-      </div>
+      <span class="eyebrow" style="margin-bottom:14px;">Casos reais · Operações em produção</span>
+      <h2>Painéis usados todo dia, não só na apresentação.</h2>
+      <p>A validação de qualquer diagnóstico é o uso contínuo depois da entrega. Estes são exemplos do que sai do papel.</p>
     </div>
 
-    <!-- CARROSSEL DE TELAS — mockups ilustrativos do painel, não screenshots
-         reais (evita expor dado operacional de verdade na vitrine pública). -->
-    <div class="screens-carousel reveal" id="screens-carousel">
-      <p class="screens-lead">Um retrato de como fica por dentro — telas ilustrativas do tipo de painel entregue.</p>
-      <div class="screens-viewport" id="screens-viewport">
-        <div class="screens-track" id="screens-track">
+    <!-- ABAS DE CLIENTES — cada aba troca o case inteiro (texto + carrossel) abaixo.
+         Para adicionar um novo cliente autorizado: (1) duplique um <button class="case-tab">
+         aqui embaixo com um novo data-client, e (2) duplique um bloco .case-panel
+         correspondente lá embaixo com o mesmo data-client. Nenhum JS extra é necessário,
+         a troca de abas já é genérica para qualquer quantidade de clientes. -->
+    <div class="case-tabs reveal" id="case-tabs" role="tablist" aria-label="Selecionar cliente">
+      <button class="case-tab active" type="button" role="tab" aria-selected="true" data-client="gcm">GCM São Leopoldo</button>
+      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-2">Cliente 2</button>
+      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-3">Cliente 3</button>
+    </div>
 
-          <div class="screen-card" data-screen="0">
-            <div class="screen-frame">
-              <div class="screen-bar"><span></span><span></span><span></span></div>
-              <div class="screen-body">
-                <div class="screen-kpis">
-                  <div class="screen-kpi"><div class="val">1.284</div><div class="lbl">Registros/mês</div></div>
-                  <div class="screen-kpi"><div class="val cyan">98,6%</div><div class="lbl">Integridade</div></div>
-                  <div class="screen-kpi"><div class="val">6</div><div class="lbl">Painéis ativos</div></div>
-                </div>
-                <svg class="screen-chart" viewBox="0 0 260 70" preserveAspectRatio="none">
-                  <path d="M0,54 L26,44 L52,49 L78,28 L104,33 L130,18 L156,25 L182,10 L208,16 L234,6 L260,14" fill="none" stroke="#35d0f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
+    <div class="case-panels" id="case-panels">
+
+      <!-- ================= PAINEL 1 — GCM SÃO LEOPOLDO (caso real, autorizado) ================= -->
+      <div class="case-panel active" data-client="gcm" role="tabpanel">
+        <div class="case-card reveal tilt">
+          <div class="case-card-main">
+            <span class="case-tag mono">GCM São Leopoldo</span>
+            <h3>Painel de ocorrências, do registro bruto à decisão operacional</h3>
+            <p class="case-desc">A Guarda Civil Municipal de São Leopoldo tratava ocorrências em planilhas soltas, sem visão consolidada por período, bairro ou tipo. A Gauss Data estruturou os dados históricos (2022–2026, incluindo bases da SSP/RS) em um painel público e outro interno, atualizados automaticamente — substituindo a compilação manual mensal por leitura direta do indicador.</p>
+            <!-- CONFIRMAR: "6+" já é real (proof-strip) e "2022–2026" também. Removido o % de integridade
+                 não verificado — se algum dia tiver o número real auditado, pode voltar aqui. -->
+            <div class="case-stats">
+              <div class="case-stat">
+                <span class="case-stat-val mono" data-counter data-target="6" data-suffix="+">0</span>
+                <span class="case-stat-lbl">painéis em produção</span>
+              </div>
+              <div class="case-stat">
+                <span class="case-stat-val mono">2022–2026</span>
+                <span class="case-stat-lbl">de dados SSP/RS tratados</span>
+              </div>
+              <div class="case-stat">
+                <span class="case-stat-val mono" style="font-size:15px;line-height:1.3;">Público &amp; interno</span>
+                <span class="case-stat-lbl">painéis em operação simultânea</span>
               </div>
             </div>
-            <span class="screen-caption">Visão geral</span>
+            <!-- SUBSTITUIR: quando tiver um depoimento real do gestor da GCM, trocar o bloco abaixo por uma citação direta e atribuída -->
+            <p class="case-note">* Case documentado a partir de operação real. Depoimento do gestor responsável pode ser incluído aqui mediante autorização.</p>
           </div>
+        </div>
 
-          <div class="screen-card" data-screen="1">
-            <div class="screen-frame">
-              <div class="screen-bar"><span></span><span></span><span></span></div>
-              <div class="screen-body">
-                <div class="screen-label">Ocorrências por bairro</div>
-                <div class="pillar-row"><span class="pillar-name mono">Centro</span><span class="bar-track"><span class="bar-fill" style="width:88%"></span></span></div>
-                <div class="pillar-row"><span class="pillar-name mono">Rio Branco</span><span class="bar-track"><span class="bar-fill" style="width:64%"></span></span></div>
-                <div class="pillar-row"><span class="pillar-name mono">Feitoria</span><span class="bar-track"><span class="bar-fill" style="width:46%"></span></span></div>
-                <div class="pillar-row"><span class="pillar-name mono">Scharlau</span><span class="bar-track"><span class="bar-fill" style="width:31%"></span></span></div>
-              </div>
-            </div>
-            <span class="screen-caption">Ocorrências por bairro</span>
-          </div>
+        <!-- CARROSSEL DE TELAS — screenshots reais do painel entregue à GCM,
+             servidos como assets estáticos em assets/screens/ (sem base64). -->
+        <div class="screens-carousel reveal">
+          <p class="screens-lead">Um retrato de como fica por dentro — telas reais do painel entregue à GCM São Leopoldo.</p>
+          <div class="screens-viewport">
+            <div class="screens-track">
 
-          <div class="screen-card" data-screen="2">
-            <div class="screen-frame">
-              <div class="screen-bar"><span></span><span></span><span></span></div>
-              <div class="screen-body">
-                <div class="screen-label">Linha do tempo</div>
-                <div class="screen-table">
-                  <div class="screen-table-row head"><span>Data</span><span>Tipo</span><span>Bairro</span><span>Turno</span></div>
-                  <div class="screen-table-row"><span>03/07</span><span>Furto</span><span>Centro</span><span>Noite</span></div>
-                  <div class="screen-table-row"><span>05/07</span><span>Perturbação</span><span>Rio Branco</span><span>Tarde</span></div>
-                  <div class="screen-table-row"><span>08/07</span><span>Trânsito</span><span>Feitoria</span><span>Manhã</span></div>
-                  <div class="screen-table-row"><span>11/07</span><span>Vandalismo</span><span>Scharlau</span><span>Noite</span></div>
+              <div class="screen-card" data-screen="0">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/gcm-visao-geral.webp" alt="Painel GCM São Leopoldo — visão geral com KPIs de ocorrências" loading="lazy" width="1400" height="327">
+                  </div>
                 </div>
+                <span class="screen-caption">Visão geral</span>
               </div>
-            </div>
-            <span class="screen-caption">Linha do tempo</span>
-          </div>
 
-          <div class="screen-card" data-screen="3">
-            <div class="screen-frame">
-              <div class="screen-bar"><span></span><span></span><span></span></div>
-              <div class="screen-body">
-                <div class="screen-label">Filtros &amp; exportação</div>
-                <div class="screen-chips">
-                  <span class="screen-chip">Período: 30 dias</span>
-                  <span class="screen-chip">Tipo: todos</span>
-                  <span class="screen-chip">Bairro: todos</span>
-                  <span class="screen-chip">Turno: todos</span>
+              <div class="screen-card" data-screen="1">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/gcm-evolucao-ocorrencias.webp" alt="Painel GCM São Leopoldo — evolução das ocorrências ao longo do tempo" loading="lazy" width="1400" height="344">
+                  </div>
                 </div>
-                <div class="screen-export">
-                  <span class="screen-export-count mono">1.284 registros</span>
-                  <span class="screen-export-btn">Exportar PDF</span>
-                </div>
+                <span class="screen-caption">Evolução das ocorrências</span>
               </div>
-            </div>
-            <span class="screen-caption">Filtros e exportação</span>
-          </div>
 
+              <div class="screen-card" data-screen="2">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/gcm-tipo-bairro.webp" alt="Painel GCM São Leopoldo — comparativo de ocorrências por tipo e bairro" loading="lazy" width="1400" height="709">
+                  </div>
+                </div>
+                <span class="screen-caption">Comparativo por tipo e bairro</span>
+              </div>
+
+              <div class="screen-card" data-screen="3">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/gcm-ranking-bairros.webp" alt="Painel GCM São Leopoldo — ranking de ocorrências por bairro" loading="lazy" width="1400" height="555">
+                  </div>
+                </div>
+                <span class="screen-caption">Ranking por bairro</span>
+              </div>
+
+              <div class="screen-card" data-screen="4">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/gcm-log-ocorrencias.webp" alt="Painel GCM São Leopoldo — log detalhado de ocorrências" loading="lazy" width="1400" height="546">
+                  </div>
+                </div>
+                <span class="screen-caption">Log de ocorrências</span>
+              </div>
+
+            </div>
+          </div>
+          <div class="screens-controls">
+            <button class="screens-arrow screens-prev" type="button" aria-label="Tela anterior">‹</button>
+            <div class="screens-dots"></div>
+            <button class="screens-arrow screens-next" type="button" aria-label="Próxima tela">›</button>
+          </div>
         </div>
       </div>
-      <div class="screens-controls">
-        <button class="screens-arrow" id="screens-prev" type="button" aria-label="Tela anterior">‹</button>
-        <div class="screens-dots" id="screens-dots"></div>
-        <button class="screens-arrow" id="screens-next" type="button" aria-label="Próxima tela">›</button>
+
+      <!-- ================= PAINEL 2 — EXEMPLO, SUBSTITUIR PELO PRÓXIMO CLIENTE AUTORIZADO =================
+           Tudo abaixo é placeholder ilustrativo (accent violeta, pra ficar visualmente
+           diferente do azul do GCM). Troque case-tag, título, descrição, stats e as
+           4 telas do carrossel pelo case real assim que tiver autorização do cliente. -->
+      <div class="case-panel" data-client="cliente-2" data-accent="violet" role="tabpanel" hidden>
+        <div class="case-card reveal tilt">
+          <div class="case-card-main">
+            <span class="case-tag mono">Cliente 2 — exemplo</span>
+            <h3>[Título do case: qual problema esse painel resolveu]</h3>
+            <p class="case-desc">[Descrição curta do cliente, do problema que ele tinha antes e do que a Gauss Data estruturou. Mesmo tom do case do GCM: contexto → o que foi feito → resultado.]</p>
+            <div class="case-stats">
+              <div class="case-stat">
+                <span class="case-stat-val mono">—</span>
+                <span class="case-stat-lbl">[métrica 1]</span>
+              </div>
+              <div class="case-stat">
+                <span class="case-stat-val mono">—</span>
+                <span class="case-stat-lbl">[métrica 2]</span>
+              </div>
+              <div class="case-stat">
+                <span class="case-stat-val mono">—</span>
+                <span class="case-stat-lbl">[métrica 3]</span>
+              </div>
+            </div>
+            <p class="case-note">* Substituir por case real assim que houver autorização do cliente.</p>
+          </div>
+        </div>
+
+        <div class="screens-carousel reveal">
+          <p class="screens-lead">Um retrato de como fica por dentro — telas ilustrativas do tipo de painel entregue.</p>
+          <div class="screens-viewport">
+            <div class="screens-track">
+
+              <div class="screen-card" data-screen="0">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-kpis">
+                      <div class="screen-kpi"><div class="val">—</div><div class="lbl">[KPI 1]</div></div>
+                      <div class="screen-kpi"><div class="val cyan">—</div><div class="lbl">[KPI 2]</div></div>
+                      <div class="screen-kpi"><div class="val">—</div><div class="lbl">[KPI 3]</div></div>
+                    </div>
+                    <svg class="screen-chart" viewBox="0 0 260 70" preserveAspectRatio="none">
+                      <path d="M0,54 L26,44 L52,49 L78,28 L104,33 L130,18 L156,25 L182,10 L208,16 L234,6 L260,14" fill="none" stroke="#35d0f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <span class="screen-caption">Visão geral</span>
+              </div>
+
+              <div class="screen-card" data-screen="1">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-label">[Nome do gráfico 2]</div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 1</span><span class="bar-track"><span class="bar-fill" style="width:80%"></span></span></div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 2</span><span class="bar-track"><span class="bar-fill" style="width:60%"></span></span></div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 3</span><span class="bar-track"><span class="bar-fill" style="width:40%"></span></span></div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 4</span><span class="bar-track"><span class="bar-fill" style="width:25%"></span></span></div>
+                  </div>
+                </div>
+                <span class="screen-caption">[Legenda da tela 2]</span>
+              </div>
+
+              <div class="screen-card" data-screen="2">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-label">[Nome do gráfico 3]</div>
+                    <div class="screen-table">
+                      <div class="screen-table-row head"><span>Col 1</span><span>Col 2</span><span>Col 3</span><span>Col 4</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="screen-caption">[Legenda da tela 3]</span>
+              </div>
+
+              <div class="screen-card" data-screen="3">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-label">[Nome do gráfico 4]</div>
+                    <div class="screen-chips">
+                      <span class="screen-chip">[filtro 1]</span>
+                      <span class="screen-chip">[filtro 2]</span>
+                      <span class="screen-chip">[filtro 3]</span>
+                      <span class="screen-chip">[filtro 4]</span>
+                    </div>
+                    <div class="screen-export">
+                      <span class="screen-export-count mono">— registros</span>
+                      <span class="screen-export-btn">Exportar PDF</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="screen-caption">[Legenda da tela 4]</span>
+              </div>
+
+            </div>
+          </div>
+          <div class="screens-controls">
+            <button class="screens-arrow screens-prev" type="button" aria-label="Tela anterior">‹</button>
+            <div class="screens-dots"></div>
+            <button class="screens-arrow screens-next" type="button" aria-label="Próxima tela">›</button>
+          </div>
+        </div>
       </div>
+
+      <!-- ================= PAINEL 3 — EXEMPLO, SUBSTITUIR PELO PRÓXIMO CLIENTE AUTORIZADO =================
+           Mesma estrutura do painel 2, accent âmbar pra diferenciar visualmente. -->
+      <div class="case-panel" data-client="cliente-3" data-accent="amber" role="tabpanel" hidden>
+        <div class="case-card reveal tilt">
+          <div class="case-card-main">
+            <span class="case-tag mono">Cliente 3 — exemplo</span>
+            <h3>[Título do case: qual problema esse painel resolveu]</h3>
+            <p class="case-desc">[Descrição curta do cliente, do problema que ele tinha antes e do que a Gauss Data estruturou.]</p>
+            <div class="case-stats">
+              <div class="case-stat">
+                <span class="case-stat-val mono">—</span>
+                <span class="case-stat-lbl">[métrica 1]</span>
+              </div>
+              <div class="case-stat">
+                <span class="case-stat-val mono">—</span>
+                <span class="case-stat-lbl">[métrica 2]</span>
+              </div>
+              <div class="case-stat">
+                <span class="case-stat-val mono">—</span>
+                <span class="case-stat-lbl">[métrica 3]</span>
+              </div>
+            </div>
+            <p class="case-note">* Substituir por case real assim que houver autorização do cliente.</p>
+          </div>
+        </div>
+
+        <div class="screens-carousel reveal">
+          <p class="screens-lead">Um retrato de como fica por dentro — telas ilustrativas do tipo de painel entregue.</p>
+          <div class="screens-viewport">
+            <div class="screens-track">
+
+              <div class="screen-card" data-screen="0">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-kpis">
+                      <div class="screen-kpi"><div class="val">—</div><div class="lbl">[KPI 1]</div></div>
+                      <div class="screen-kpi"><div class="val cyan">—</div><div class="lbl">[KPI 2]</div></div>
+                      <div class="screen-kpi"><div class="val">—</div><div class="lbl">[KPI 3]</div></div>
+                    </div>
+                    <svg class="screen-chart" viewBox="0 0 260 70" preserveAspectRatio="none">
+                      <path d="M0,54 L26,44 L52,49 L78,28 L104,33 L130,18 L156,25 L182,10 L208,16 L234,6 L260,14" fill="none" stroke="#35d0f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <span class="screen-caption">Visão geral</span>
+              </div>
+
+              <div class="screen-card" data-screen="1">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-label">[Nome do gráfico 2]</div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 1</span><span class="bar-track"><span class="bar-fill" style="width:80%"></span></span></div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 2</span><span class="bar-track"><span class="bar-fill" style="width:60%"></span></span></div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 3</span><span class="bar-track"><span class="bar-fill" style="width:40%"></span></span></div>
+                    <div class="pillar-row"><span class="pillar-name mono">Item 4</span><span class="bar-track"><span class="bar-fill" style="width:25%"></span></span></div>
+                  </div>
+                </div>
+                <span class="screen-caption">[Legenda da tela 2]</span>
+              </div>
+
+              <div class="screen-card" data-screen="2">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-label">[Nome do gráfico 3]</div>
+                    <div class="screen-table">
+                      <div class="screen-table-row head"><span>Col 1</span><span>Col 2</span><span>Col 3</span><span>Col 4</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
+                    </div>
+                  </div>
+                </div>
+                <span class="screen-caption">[Legenda da tela 3]</span>
+              </div>
+
+              <div class="screen-card" data-screen="3">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body">
+                    <div class="screen-label">[Nome do gráfico 4]</div>
+                    <div class="screen-chips">
+                      <span class="screen-chip">[filtro 1]</span>
+                      <span class="screen-chip">[filtro 2]</span>
+                      <span class="screen-chip">[filtro 3]</span>
+                      <span class="screen-chip">[filtro 4]</span>
+                    </div>
+                    <div class="screen-export">
+                      <span class="screen-export-count mono">— registros</span>
+                      <span class="screen-export-btn">Exportar PDF</span>
+                    </div>
+                  </div>
+                </div>
+                <span class="screen-caption">[Legenda da tela 4]</span>
+              </div>
+
+            </div>
+          </div>
+          <div class="screens-controls">
+            <button class="screens-arrow screens-prev" type="button" aria-label="Tela anterior">‹</button>
+            <div class="screens-dots"></div>
+            <button class="screens-arrow screens-next" type="button" aria-label="Próxima tela">›</button>
+          </div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

@@ -969,24 +969,26 @@
 
   /* =========================================================
      20. CARROSSEL DE TELAS — coverflow com perspectiva 3D
+     Suporta múltiplas instâncias (uma por painel de cliente).
      Navegação circular (sem fim), autoplay que pausa ao
      interagir, swipe no touch e setas do teclado. Sem libs.
   ========================================================= */
-  (function initScreensCarousel() {
-    const viewport = document.getElementById('screens-viewport');
-    const track = document.getElementById('screens-track');
-    const dotsWrap = document.getElementById('screens-dots');
-    const prevBtn = document.getElementById('screens-prev');
-    const nextBtn = document.getElementById('screens-next');
-    if (!viewport || !track || !dotsWrap) return;
+  function initScreensCarousel(root) {
+    const viewport = root.querySelector('.screens-viewport');
+    const track = root.querySelector('.screens-track');
+    const dotsWrap = root.querySelector('.screens-dots');
+    const prevBtn = root.querySelector('.screens-prev');
+    const nextBtn = root.querySelector('.screens-next');
+    if (!viewport || !track || !dotsWrap) return null;
 
     const cards = Array.from(track.querySelectorAll('.screen-card'));
     const total = cards.length;
-    if (!total) return;
+    if (!total) return null;
 
     let active = 0;
     let autoplayId = null;
 
+    dotsWrap.innerHTML = '';
     cards.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.type = 'button';
@@ -1073,6 +1075,8 @@
     viewport.addEventListener('focusout', startAutoplay);
 
     // Só roda o autoplay enquanto o carrossel está visível na tela
+    // (elementos com hidden/display:none nunca ficam "intersecting",
+    // então trocar de aba já pausa/retoma o autoplay automaticamente)
     const screensIO = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) startAutoplay(); else stopAutoplay();
@@ -1081,5 +1085,47 @@
     screensIO.observe(viewport);
 
     layout();
+    return { goTo, layout, startAutoplay, stopAutoplay };
+  }
+
+  // Inicializa um carrossel para cada painel de cliente encontrado na página
+  const screensCarousels = Array.from(document.querySelectorAll('.screens-carousel'))
+    .map(el => initScreensCarousel(el))
+    .filter(Boolean);
+
+  /* =========================================================
+     20b. ABAS DE CLIENTES — troca qual .case-panel fica visível
+     dentro da seção #resultados. Genérico: funciona com
+     qualquer quantidade de abas/painéis, basta manter o mesmo
+     data-client no botão e no painel correspondente no HTML.
+  ========================================================= */
+  (function initCaseTabs() {
+    const tabsWrap = document.getElementById('case-tabs');
+    const panelsWrap = document.getElementById('case-panels');
+    if (!tabsWrap || !panelsWrap) return;
+
+    const tabs = Array.from(tabsWrap.querySelectorAll('.case-tab'));
+    const panels = Array.from(panelsWrap.querySelectorAll('.case-panel'));
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const client = tab.dataset.client;
+        if (tab.classList.contains('active')) return;
+
+        tabs.forEach(t => {
+          const isActive = t === tab;
+          t.classList.toggle('active', isActive);
+          t.setAttribute('aria-selected', String(isActive));
+        });
+
+        panels.forEach(panel => {
+          const isActive = panel.dataset.client === client;
+          panel.hidden = !isActive;
+          panel.classList.toggle('active', isActive);
+        });
+
+        trackEvent('case_tab_click', { client });
+      });
+    });
   })();
 })();

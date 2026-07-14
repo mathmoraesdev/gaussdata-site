@@ -146,7 +146,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
     width:100%;
     margin:0 auto;
   }
-  .scroll-cue{display:none;}
 }
 @media(max-width:480px){
   .dash-main{padding:20px 18px 16px;}
@@ -243,14 +242,6 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
 }
 .dash-status .dot{width:7px;height:7px;border-radius:50%;background:var(--cyan-bright);box-shadow:0 0 8px var(--cyan-bright);}
 .dash-status .txt{font-size:12px;color:var(--text-muted);display:flex;align-items:center;gap:8px;}
-
-.scroll-cue{
-  position:absolute;bottom:28px;left:50%;transform:translateX(-50%);
-  font-size:12px;color:var(--text-dim);letter-spacing:0.12em;
-  display:flex;flex-direction:column;align-items:center;gap:8px;z-index:2;
-}
-.scroll-cue .line{width:1px;height:26px;background:linear-gradient(var(--text-dim),transparent);animation:scrollpulse 2s ease-in-out infinite;}
-@keyframes scrollpulse{0%,100%{opacity:0.3;}50%{opacity:1;}}
 
 /* Hero entrance ("load-in") */
 .load-in{
@@ -428,18 +419,65 @@ section{padding:130px 0;position:relative;}
 .case-note{font-size:12.5px;color:var(--text-dim);font-style:italic;}
 @media(max-width:600px){.case-card{padding:30px 24px;}.case-stats{gap:28px;}}
 
+/* ABAS DE CLIENTES (acima do carrossel) */
+.case-tabs{
+  display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+  margin:36px 0 8px;
+}
+.case-tab{
+  font-family:'Inter',sans-serif;font-size:13.5px;font-weight:500;
+  color:var(--text-muted);background:transparent;
+  border:1px solid var(--line);border-radius:100px;
+  padding:9px 20px;cursor:pointer;
+  transition:color .25s ease, border-color .25s ease, background .25s ease;
+}
+.case-tab:hover{color:var(--text-primary);border-color:rgba(53,208,245,0.35);}
+.case-tab.active{
+  color:#04101f;background:var(--cyan-bright);border-color:var(--cyan-bright);
+  font-weight:600;
+}
+
+.case-panels{margin-top:8px;}
+.case-panel{}
+.case-panel[hidden]{display:none;}
+
+/* Accent por cliente — troca a cor de destaque do case pra diferenciar
+   visualmente cada cliente no carrossel (mesma estrutura, cor diferente).
+   Painéis sem data-accent (ex: GCM) usam o azul/ciano padrão do site. */
+.case-panel[data-accent="violet"]{
+  --case-accent:#a78bfa; --case-accent-soft:rgba(167,139,250,0.3); --case-accent-bg:rgba(167,139,250,0.06);
+}
+.case-panel[data-accent="amber"]{
+  --case-accent:#f5b942; --case-accent-soft:rgba(245,185,66,0.3); --case-accent-bg:rgba(245,185,66,0.06);
+}
+.case-panel[data-accent] .case-tag{
+  color:var(--case-accent);border-color:var(--case-accent-soft);
+}
+.case-panel[data-accent] .case-stat-val{color:var(--case-accent);}
+.case-panel[data-accent] .screens-arrow:hover{
+  border-color:var(--case-accent);color:var(--case-accent);background:var(--case-accent-bg);
+}
+.case-panel[data-accent] .screens-dot.active{background:var(--case-accent);}
+.case-panel[data-accent] .screen-kpi .val.cyan{color:var(--case-accent);}
+.case-panel[data-accent] .screen-export-btn{background:var(--case-accent);}
+
+@media(max-width:600px){
+  .case-tabs{gap:8px;}
+  .case-tab{font-size:12.5px;padding:8px 16px;}
+}
+
 /* CARROSSEL DE TELAS — coverflow com perspectiva 3D */
 .screens-carousel{margin-top:56px;}
 .screens-lead{font-size:13.5px;color:var(--text-dim);text-align:center;margin-bottom:28px;}
 .screens-viewport{
-  position:relative;height:280px;
+  position:relative;height:420px;
   perspective:1400px;
   display:flex;align-items:center;justify-content:center;
   touch-action:pan-y;
 }
 .screens-track{position:relative;width:100%;height:100%;transform-style:preserve-3d;}
 .screen-card{
-  position:absolute;top:50%;left:50%;width:280px;
+  position:absolute;top:50%;left:50%;width:560px;
   transform:translate(-50%,-50%);
   transition:transform .6s var(--ease-out), opacity .6s var(--ease-out), filter .6s var(--ease-out);
   cursor:pointer;
@@ -453,6 +491,8 @@ section{padding:130px 0;position:relative;}
 .screen-bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line-soft);}
 .screen-bar span{width:6px;height:6px;border-radius:50%;background:var(--line);}
 .screen-body{padding:16px 16px 18px;height:150px;overflow:hidden;}
+.screen-body-img{padding:8px;background:#070c1a;}
+.screen-body-img img{display:block;width:100%;height:auto;object-fit:contain;border-radius:4px;}
 .screen-caption{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--text-dim);letter-spacing:0.03em;}
 
 .screen-kpis{display:flex;gap:14px;margin-bottom:14px;}
@@ -487,9 +527,10 @@ section{padding:130px 0;position:relative;}
 .screens-dot.active{background:var(--cyan-bright);transform:scale(1.25);}
 
 @media(max-width:600px){
-  .screens-viewport{height:230px;}
-  .screen-card{width:220px;}
+  .screens-viewport{height:280px;}
+  .screen-card{width:280px;}
   .screen-body{height:130px;padding:13px 13px 15px;}
+  .screen-body-img{padding:5px;}
   .screen-kpi .val{font-size:13px;}
   .screen-chart{height:52px;}
 }
@@ -730,7 +771,6 @@ footer .wrap{position:relative;z-index:1;}
 @media (prefers-reduced-motion: reduce){
   .reveal, .why-grid.reveal .why-card, .service-grid .service-card.reveal, .method-list.reveal .method-item{transition:none;}
   .load-in{animation:none;opacity:1;transform:none;}
-  .scroll-cue .line{animation:none;}
   .tilt, .magnetic, .btn{transition:none;}
   .wa-float-ring{animation:none;}
   .method-progress-fill, .quiz-gauge-fill, .quiz-result-bar-fill{transition:none;}
