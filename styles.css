@@ -529,9 +529,9 @@ section{padding:130px 0;position:relative;}
 .screens-dot.active{background:var(--cyan-bright);transform:scale(1.25);}
 
 @media(max-width:600px){
-  .screens-viewport{height:460px;}
+  .screens-viewport{height:300px;}
   .screen-card{width:320px;}
-  .screen-body{height:260px;padding:13px 13px 15px;}
+  .screen-body{height:auto;padding:13px 13px 15px;}
   .screen-body-img{padding:5px;}
   .screen-kpi .val{font-size:13px;}
   .screen-chart{height:52px;}
