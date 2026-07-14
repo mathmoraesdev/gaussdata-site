@@ -975,13 +975,111 @@
   ========================================================= */
   /* Lightbox de zoom para as telas reais do painel (carrossel de screens) */
   const screenLightbox = document.getElementById('screen-lightbox');
+  const screenLightboxStage = document.getElementById('screen-lightbox-stage');
   const screenLightboxImg = document.getElementById('screen-lightbox-img');
   const screenLightboxCaption = document.getElementById('screen-lightbox-caption');
   const screenLightboxClose = document.getElementById('screen-lightbox-close');
   let lastLightboxTrigger = null;
 
+  // Trava o pinch-zoom nativo da página enquanto o popup está aberto —
+  // é isso que causava a "sobra" de fundo ao afastar os dedos além da
+  // imagem. O zoom dentro do popup passa a ser só o customizado abaixo.
+  function lockViewportZoom(lock) {
+    const meta = document.querySelector('meta[name="viewport"]');
+    if (!meta) return;
+    if (lock) {
+      if (!meta.dataset.baseContent) meta.dataset.baseContent = meta.getAttribute('content') || '';
+      meta.setAttribute('content', meta.dataset.baseContent + ', maximum-scale=1, user-scalable=no');
+    } else if (meta.dataset.baseContent) {
+      meta.setAttribute('content', meta.dataset.baseContent);
+    }
+  }
+
+  // Pinça/arrasto customizado dentro da imagem — só permite ampliar
+  // (scale >= 1); nunca deixa "tirar" o zoom a ponto de sobrar fundo.
+  const LB_MIN_SCALE = 1;
+  const LB_MAX_SCALE = 3.5;
+  let lbScale = 1, lbX = 0, lbY = 0;
+  let lbPinchStartDist = 0, lbPinchStartScale = 1;
+  let lbDragging = false, lbDragStartX = 0, lbDragStartY = 0, lbDragOriginX = 0, lbDragOriginY = 0;
+  let lbLastTap = 0;
+
+  function lbApply() {
+    if (screenLightboxImg) {
+      screenLightboxImg.style.transform = `translate(${lbX}px, ${lbY}px) scale(${lbScale})`;
+    }
+  }
+  function lbClampPan() {
+    if (!screenLightboxStage) return;
+    const rect = screenLightboxStage.getBoundingClientRect();
+    const maxX = Math.max(0, (rect.width * (lbScale - 1)) / 2);
+    const maxY = Math.max(0, (rect.height * (lbScale - 1)) / 2);
+    lbX = Math.min(maxX, Math.max(-maxX, lbX));
+    lbY = Math.min(maxY, Math.max(-maxY, lbY));
+  }
+  function lbReset() {
+    lbScale = 1; lbX = 0; lbY = 0;
+    if (screenLightboxImg) screenLightboxImg.style.transform = '';
+  }
+
+  if (screenLightboxStage) {
+    screenLightboxStage.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 2) {
+        lbPinchStartDist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        lbPinchStartScale = lbScale;
+      } else if (e.touches.length === 1 && lbScale > 1) {
+        lbDragging = true;
+        lbDragStartX = e.touches[0].clientX;
+        lbDragStartY = e.touches[0].clientY;
+        lbDragOriginX = lbX;
+        lbDragOriginY = lbY;
+      }
+    }, { passive: true });
+
+    screenLightboxStage.addEventListener('touchmove', (e) => {
+      if (e.touches.length === 2 && lbPinchStartDist) {
+        e.preventDefault();
+        const dist = Math.hypot(
+          e.touches[0].clientX - e.touches[1].clientX,
+          e.touches[0].clientY - e.touches[1].clientY
+        );
+        lbScale = Math.min(LB_MAX_SCALE, Math.max(LB_MIN_SCALE, lbPinchStartScale * (dist / lbPinchStartDist)));
+        lbClampPan();
+        lbApply();
+      } else if (e.touches.length === 1 && lbDragging) {
+        e.preventDefault();
+        lbX = lbDragOriginX + (e.touches[0].clientX - lbDragStartX);
+        lbY = lbDragOriginY + (e.touches[0].clientY - lbDragStartY);
+        lbClampPan();
+        lbApply();
+      }
+    }, { passive: false });
+
+    screenLightboxStage.addEventListener('touchend', (e) => {
+      if (e.touches.length < 2) lbPinchStartDist = 0;
+      if (e.touches.length === 0) {
+        lbDragging = false;
+        // Nunca deixa o resultado final abaixo do encaixe (scale 1)
+        if (lbScale < LB_MIN_SCALE) { lbScale = LB_MIN_SCALE; lbX = 0; lbY = 0; lbApply(); }
+
+        const now = Date.now();
+        if (now - lbLastTap < 300) {
+          if (lbScale > 1) { lbScale = 1; lbX = 0; lbY = 0; }
+          else { lbScale = 2; }
+          lbClampPan();
+          lbApply();
+        }
+        lbLastTap = now;
+      }
+    }, { passive: true });
+  }
+
   function openScreenLightbox(imgEl, captionText, triggerEl) {
     if (!screenLightbox || !screenLightboxImg || !imgEl) return;
+    lbReset();
     screenLightboxImg.src = imgEl.getAttribute('src');
     screenLightboxImg.alt = imgEl.getAttribute('alt') || '';
     if (screenLightboxCaption) screenLightboxCaption.textContent = captionText || '';
@@ -989,6 +1087,7 @@
     screenLightbox.classList.add('active');
     screenLightbox.setAttribute('aria-hidden', 'false');
     document.body.style.overflow = 'hidden';
+    lockViewportZoom(true);
     screenLightboxClose?.focus();
   }
   function closeScreenLightbox() {
@@ -996,6 +1095,8 @@
     screenLightbox.classList.remove('active');
     screenLightbox.setAttribute('aria-hidden', 'true');
     document.body.style.overflow = '';
+    lockViewportZoom(false);
+    lbReset();
     lastLightboxTrigger?.focus();
   }
   if (screenLightbox) {
