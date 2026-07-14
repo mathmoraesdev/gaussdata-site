@@ -315,17 +315,6 @@
       <p>A validação de qualquer diagnóstico é o uso contínuo depois da entrega. Estes são exemplos do que sai do papel.</p>
     </div>
 
-    <!-- ABAS DE CLIENTES — cada aba troca o case inteiro (texto + carrossel) abaixo.
-         Para adicionar um novo cliente autorizado: (1) duplique um <button class="case-tab">
-         aqui embaixo com um novo data-client, e (2) duplique um bloco .case-panel
-         correspondente lá embaixo com o mesmo data-client. Nenhum JS extra é necessário,
-         a troca de abas já é genérica para qualquer quantidade de clientes. -->
-    <div class="case-tabs reveal" id="case-tabs" role="tablist" aria-label="Selecionar cliente">
-      <button class="case-tab active" type="button" role="tab" aria-selected="true" data-client="gcm">GCM São Leopoldo</button>
-      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-2">Cliente 2</button>
-      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-3">Cliente 3</button>
-    </div>
-
     <div class="case-panels" id="case-panels">
 
       <!-- ================= PAINEL 1 — GCM SÃO LEOPOLDO (caso real, autorizado) ================= -->
@@ -366,7 +355,6 @@
               <div class="screen-card" data-screen="0">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <button class="screen-zoom-hint" type="button" tabindex="-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                   <div class="screen-body screen-body-img">
                     <img src="assets/screens/gcm-visao-geral.webp" alt="Painel GCM São Leopoldo — visão geral com KPIs de ocorrências" loading="lazy" width="2200" height="514">
                   </div>
@@ -377,7 +365,6 @@
               <div class="screen-card" data-screen="1">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <button class="screen-zoom-hint" type="button" tabindex="-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                   <div class="screen-body screen-body-img">
                     <img src="assets/screens/gcm-evolucao-ocorrencias.webp" alt="Painel GCM São Leopoldo — evolução das ocorrências ao longo do tempo" loading="lazy" width="2200" height="542">
                   </div>
@@ -388,7 +375,6 @@
               <div class="screen-card" data-screen="2">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <button class="screen-zoom-hint" type="button" tabindex="-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                   <div class="screen-body screen-body-img">
                     <img src="assets/screens/gcm-tipo-bairro.webp" alt="Painel GCM São Leopoldo — comparativo de ocorrências por tipo e bairro" loading="lazy" width="2200" height="1114">
                   </div>
@@ -399,7 +385,6 @@
               <div class="screen-card" data-screen="3">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <button class="screen-zoom-hint" type="button" tabindex="-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                   <div class="screen-body screen-body-img">
                     <img src="assets/screens/gcm-ranking-bairros.webp" alt="Painel GCM São Leopoldo — ranking de ocorrências por bairro" loading="lazy" width="2200" height="872">
                   </div>
@@ -410,7 +395,6 @@
               <div class="screen-card" data-screen="4">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <button class="screen-zoom-hint" type="button" tabindex="-1" aria-hidden="true"><svg width="16" height="16" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="1.8"/><path d="M20 20l-4.5-4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/><path d="M11 8v6M8 11h6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg></button>
                   <div class="screen-body screen-body-img">
                     <img src="assets/screens/gcm-log-ocorrencias.webp" alt="Painel GCM São Leopoldo — log detalhado de ocorrências" loading="lazy" width="2200" height="858">
                   </div>
@@ -648,6 +632,17 @@
         </div>
       </div>
 
+    </div>
+
+    <!-- ABAS DE CLIENTES — cada aba troca o case inteiro (texto + carrossel) acima.
+         Para adicionar um novo cliente autorizado: (1) duplique um <button class="case-tab">
+         aqui embaixo com um novo data-client, e (2) duplique um bloco .case-panel
+         correspondente lá em cima com o mesmo data-client. Nenhum JS extra é necessário,
+         a troca de abas já é genérica para qualquer quantidade de clientes. -->
+    <div class="case-tabs reveal" id="case-tabs" role="tablist" aria-label="Selecionar cliente">
+      <button class="case-tab active" type="button" role="tab" aria-selected="true" data-client="gcm">GCM São Leopoldo</button>
+      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-2">Cliente 2</button>
+      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-3">Cliente 3</button>
     </div>
   </div>
 </section>

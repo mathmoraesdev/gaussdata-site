@@ -1070,14 +1070,16 @@
 
     if (reduceMotion) cards.forEach(card => card.classList.add('no-anim'));
 
-    cards.forEach((card, i) => card.addEventListener('click', () => {
+    function activateCard(i, card) {
       if (i !== active) { goTo(i); return; }
       const img = card.querySelector('.screen-body-img img');
       if (img) {
         const caption = card.querySelector('.screen-caption')?.textContent || '';
         openScreenLightbox(img, caption, card);
       }
-    }));
+    }
+
+    cards.forEach((card, i) => card.addEventListener('click', () => activateCard(i, card)));
     if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
     if (nextBtn) nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
 
@@ -1088,10 +1090,22 @@
       if (e.key === 'ArrowRight') { next(); restartAutoplay(); }
     });
 
-    // Swipe no touch
+    // Swipe e tap no touch — tratados manualmente (em vez de depender do
+    // click sintético do navegador) pra garantir que o toque na tela ativa
+    // sempre abra o zoom, mesmo em mobile.
     let touchStartX = null;
+    let touchStartY = null;
+    let touchMoved = false;
     viewport.addEventListener('touchstart', (e) => {
       touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchMoved = false;
+    }, { passive: true });
+    viewport.addEventListener('touchmove', (e) => {
+      if (touchStartX === null) return;
+      const dx = Math.abs(e.touches[0].clientX - touchStartX);
+      const dy = Math.abs(e.touches[0].clientY - touchStartY);
+      if (dx > 10 || dy > 10) touchMoved = true;
     }, { passive: true });
     viewport.addEventListener('touchend', (e) => {
       if (touchStartX === null) return;
@@ -1099,9 +1113,17 @@
       if (Math.abs(deltaX) > 40) {
         if (deltaX < 0) next(); else prev();
         restartAutoplay();
+      } else if (!touchMoved) {
+        const target = e.target.closest('.screen-card');
+        const idx = target ? cards.indexOf(target) : -1;
+        if (idx !== -1) {
+          e.preventDefault();
+          activateCard(idx, cards[idx]);
+        }
       }
       touchStartX = null;
-    }, { passive: true });
+      touchStartY = null;
+    }, { passive: false });
 
     function startAutoplay() {
       if (reduceMotion || autoplayId) return;
