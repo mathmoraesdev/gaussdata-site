@@ -340,8 +340,93 @@
         <p class="case-note">* Case documentado a partir de operação real. Depoimento do gestor responsável pode ser incluído aqui mediante autorização.</p>
       </div>
     </div>
+
+    <!-- CARROSSEL DE TELAS — mockups ilustrativos do painel, não screenshots
+         reais (evita expor dado operacional de verdade na vitrine pública). -->
+    <div class="screens-carousel reveal" id="screens-carousel">
+      <p class="screens-lead">Um retrato de como fica por dentro — telas ilustrativas do tipo de painel entregue.</p>
+      <div class="screens-viewport" id="screens-viewport">
+        <div class="screens-track" id="screens-track">
+
+          <div class="screen-card" data-screen="0">
+            <div class="screen-frame">
+              <div class="screen-bar"><span></span><span></span><span></span></div>
+              <div class="screen-body">
+                <div class="screen-kpis">
+                  <div class="screen-kpi"><div class="val">1.284</div><div class="lbl">Registros/mês</div></div>
+                  <div class="screen-kpi"><div class="val cyan">98,6%</div><div class="lbl">Integridade</div></div>
+                  <div class="screen-kpi"><div class="val">6</div><div class="lbl">Painéis ativos</div></div>
+                </div>
+                <svg class="screen-chart" viewBox="0 0 260 70" preserveAspectRatio="none">
+                  <path d="M0,54 L26,44 L52,49 L78,28 L104,33 L130,18 L156,25 L182,10 L208,16 L234,6 L260,14" fill="none" stroke="#35d0f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+            </div>
+            <span class="screen-caption">Visão geral</span>
+          </div>
+
+          <div class="screen-card" data-screen="1">
+            <div class="screen-frame">
+              <div class="screen-bar"><span></span><span></span><span></span></div>
+              <div class="screen-body">
+                <div class="screen-label">Ocorrências por bairro</div>
+                <div class="pillar-row"><span class="pillar-name mono">Centro</span><span class="bar-track"><span class="bar-fill" style="width:88%"></span></span></div>
+                <div class="pillar-row"><span class="pillar-name mono">Rio Branco</span><span class="bar-track"><span class="bar-fill" style="width:64%"></span></span></div>
+                <div class="pillar-row"><span class="pillar-name mono">Feitoria</span><span class="bar-track"><span class="bar-fill" style="width:46%"></span></span></div>
+                <div class="pillar-row"><span class="pillar-name mono">Scharlau</span><span class="bar-track"><span class="bar-fill" style="width:31%"></span></span></div>
+              </div>
+            </div>
+            <span class="screen-caption">Ocorrências por bairro</span>
+          </div>
+
+          <div class="screen-card" data-screen="2">
+            <div class="screen-frame">
+              <div class="screen-bar"><span></span><span></span><span></span></div>
+              <div class="screen-body">
+                <div class="screen-label">Linha do tempo</div>
+                <div class="screen-table">
+                  <div class="screen-table-row head"><span>Data</span><span>Tipo</span><span>Bairro</span><span>Turno</span></div>
+                  <div class="screen-table-row"><span>03/07</span><span>Furto</span><span>Centro</span><span>Noite</span></div>
+                  <div class="screen-table-row"><span>05/07</span><span>Perturbação</span><span>Rio Branco</span><span>Tarde</span></div>
+                  <div class="screen-table-row"><span>08/07</span><span>Trânsito</span><span>Feitoria</span><span>Manhã</span></div>
+                  <div class="screen-table-row"><span>11/07</span><span>Vandalismo</span><span>Scharlau</span><span>Noite</span></div>
+                </div>
+              </div>
+            </div>
+            <span class="screen-caption">Linha do tempo</span>
+          </div>
+
+          <div class="screen-card" data-screen="3">
+            <div class="screen-frame">
+              <div class="screen-bar"><span></span><span></span><span></span></div>
+              <div class="screen-body">
+                <div class="screen-label">Filtros &amp; exportação</div>
+                <div class="screen-chips">
+                  <span class="screen-chip">Período: 30 dias</span>
+                  <span class="screen-chip">Tipo: todos</span>
+                  <span class="screen-chip">Bairro: todos</span>
+                  <span class="screen-chip">Turno: todos</span>
+                </div>
+                <div class="screen-export">
+                  <span class="screen-export-count mono">1.284 registros</span>
+                  <span class="screen-export-btn">Exportar PDF</span>
+                </div>
+              </div>
+            </div>
+            <span class="screen-caption">Filtros e exportação</span>
+          </div>
+
+        </div>
+      </div>
+      <div class="screens-controls">
+        <button class="screens-arrow" id="screens-prev" type="button" aria-label="Tela anterior">‹</button>
+        <div class="screens-dots" id="screens-dots"></div>
+        <button class="screens-arrow" id="screens-next" type="button" aria-label="Próxima tela">›</button>
+      </div>
+    </div>
   </div>
 </section>
+
 
 <section id="faq" class="faq-section">
   <div class="wrap">

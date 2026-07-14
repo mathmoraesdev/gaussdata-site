@@ -428,6 +428,72 @@ section{padding:130px 0;position:relative;}
 .case-note{font-size:12.5px;color:var(--text-dim);font-style:italic;}
 @media(max-width:600px){.case-card{padding:30px 24px;}.case-stats{gap:28px;}}
 
+/* CARROSSEL DE TELAS — coverflow com perspectiva 3D */
+.screens-carousel{margin-top:56px;}
+.screens-lead{font-size:13.5px;color:var(--text-dim);text-align:center;margin-bottom:28px;}
+.screens-viewport{
+  position:relative;height:280px;
+  perspective:1400px;
+  display:flex;align-items:center;justify-content:center;
+  touch-action:pan-y;
+}
+.screens-track{position:relative;width:100%;height:100%;transform-style:preserve-3d;}
+.screen-card{
+  position:absolute;top:50%;left:50%;width:280px;
+  transform:translate(-50%,-50%);
+  transition:transform .6s var(--ease-out), opacity .6s var(--ease-out), filter .6s var(--ease-out);
+  cursor:pointer;
+}
+.screen-card.no-anim{transition:none;}
+.screen-frame{
+  background:linear-gradient(180deg, rgba(14,23,48,0.85), rgba(11,18,36,0.85));
+  border:1px solid var(--line);border-radius:14px;overflow:hidden;
+  box-shadow:0 30px 60px -25px rgba(0,0,0,0.7);
+}
+.screen-bar{display:flex;gap:6px;padding:11px 14px;border-bottom:1px solid var(--line-soft);}
+.screen-bar span{width:6px;height:6px;border-radius:50%;background:var(--line);}
+.screen-body{padding:16px 16px 18px;height:150px;overflow:hidden;}
+.screen-caption{display:block;text-align:center;margin-top:14px;font-size:12px;color:var(--text-dim);letter-spacing:0.03em;}
+
+.screen-kpis{display:flex;gap:14px;margin-bottom:14px;}
+.screen-kpi .val{font-family:'Space Grotesk',sans-serif;font-size:15px;font-weight:600;}
+.screen-kpi .val.cyan{color:var(--cyan-bright);}
+.screen-kpi .lbl{font-size:9px;color:var(--text-dim);margin-top:2px;}
+.screen-chart{width:100%;height:64px;display:block;}
+.screen-label{font-size:10.5px;letter-spacing:0.06em;text-transform:uppercase;color:var(--text-dim);margin-bottom:12px;}
+
+.screen-table{display:flex;flex-direction:column;}
+.screen-table-row{display:flex;justify-content:space-between;gap:6px;font-size:10px;padding:6px 0;border-bottom:1px solid var(--line-soft);color:var(--text-muted);}
+.screen-table-row span{flex:1;text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.screen-table-row.head{color:var(--text-dim);font-size:9.5px;letter-spacing:0.04em;text-transform:uppercase;}
+
+.screen-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px;}
+.screen-chip{display:inline-flex;padding:5px 11px;border:1px solid var(--line);border-radius:100px;font-size:9.5px;color:var(--text-muted);}
+.screen-export{display:flex;align-items:center;justify-content:space-between;padding-top:14px;border-top:1px solid var(--line-soft);}
+.screen-export-count{font-size:11px;color:var(--text-muted);}
+.screen-export-btn{font-size:10.5px;font-weight:500;padding:7px 13px;border-radius:100px;background:var(--cyan-bright);color:#04101f;}
+
+.screens-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:24px;}
+.screens-arrow{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--line);background:transparent;color:var(--text-primary);
+  font-size:18px;line-height:1;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  transition:border-color .25s ease, color .25s ease, background .25s ease;
+}
+.screens-arrow:hover{border-color:var(--cyan-bright);color:var(--cyan-bright);background:rgba(53,208,245,0.06);}
+.screens-dots{display:flex;gap:8px;}
+.screens-dot{width:7px;height:7px;border-radius:50%;background:var(--line);border:none;padding:0;cursor:pointer;transition:background .3s ease, transform .3s ease;}
+.screens-dot.active{background:var(--cyan-bright);transform:scale(1.25);}
+
+@media(max-width:600px){
+  .screens-viewport{height:230px;}
+  .screen-card{width:220px;}
+  .screen-body{height:130px;padding:13px 13px 15px;}
+  .screen-kpi .val{font-size:13px;}
+  .screen-chart{height:52px;}
+}
+
 /* FAQ */
 .faq-section{background:var(--bg-panel);border-top:1px solid var(--line-soft);border-bottom:1px solid var(--line-soft);}
 .faq-list{max-width:760px;}
@@ -669,4 +735,5 @@ footer .wrap{position:relative;z-index:1;}
   .wa-float-ring{animation:none;}
   .method-progress-fill, .quiz-gauge-fill, .quiz-result-bar-fill{transition:none;}
   .cursor-glow{display:none;}
+  .screen-card{transition:none;}
 }

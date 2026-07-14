@@ -966,4 +966,120 @@
     ctaLink.addEventListener('click', () => trackEvent('quiz_whatsapp_click', {}));
     renderQuestion();
   })();
+
+  /* =========================================================
+     20. CARROSSEL DE TELAS — coverflow com perspectiva 3D
+     Navegação circular (sem fim), autoplay que pausa ao
+     interagir, swipe no touch e setas do teclado. Sem libs.
+  ========================================================= */
+  (function initScreensCarousel() {
+    const viewport = document.getElementById('screens-viewport');
+    const track = document.getElementById('screens-track');
+    const dotsWrap = document.getElementById('screens-dots');
+    const prevBtn = document.getElementById('screens-prev');
+    const nextBtn = document.getElementById('screens-next');
+    if (!viewport || !track || !dotsWrap) return;
+
+    const cards = Array.from(track.querySelectorAll('.screen-card'));
+    const total = cards.length;
+    if (!total) return;
+
+    let active = 0;
+    let autoplayId = null;
+
+    cards.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.type = 'button';
+      dot.className = 'screens-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', `Ir para tela ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    });
+    const dots = Array.from(dotsWrap.querySelectorAll('.screens-dot'));
+
+    function layout() {
+      cards.forEach((card, i) => {
+        let offset = i - active;
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+        const abs = Math.abs(offset);
+
+        let x = 0, scale = 1, rotate = 0, opacity = 1, z = 30, blur = 0, pointer = 'auto';
+        if (abs === 1) {
+          x = offset * 62; scale = 0.82; rotate = offset * -28; opacity = 0.55; z = 20; blur = 1;
+        } else if (abs === 2) {
+          x = offset * 100; scale = 0.66; rotate = offset * -32; opacity = 0.16; z = 10; blur = 2; pointer = 'none';
+        } else if (abs > 2) {
+          x = offset * 120; scale = 0.5; rotate = 0; opacity = 0; z = 0; blur = 3; pointer = 'none';
+        }
+
+        card.style.transform = `translate(-50%,-50%) translateX(${x}%) scale(${scale}) rotateY(${rotate}deg)`;
+        card.style.opacity = String(opacity);
+        card.style.zIndex = String(z);
+        card.style.filter = blur ? `blur(${blur}px)` : 'none';
+        card.style.pointerEvents = pointer;
+      });
+      dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
+    }
+
+    function goTo(index) {
+      active = ((index % total) + total) % total;
+      layout();
+    }
+
+    function next() { goTo(active + 1); }
+    function prev() { goTo(active - 1); }
+
+    if (reduceMotion) cards.forEach(card => card.classList.add('no-anim'));
+
+    cards.forEach((card, i) => card.addEventListener('click', () => { if (i !== active) goTo(i); }));
+    if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
+    if (nextBtn) nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
+
+    // Setas do teclado, quando o carrossel está em foco/hover
+    viewport.setAttribute('tabindex', '0');
+    viewport.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft') { prev(); restartAutoplay(); }
+      if (e.key === 'ArrowRight') { next(); restartAutoplay(); }
+    });
+
+    // Swipe no touch
+    let touchStartX = null;
+    viewport.addEventListener('touchstart', (e) => {
+      touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+    viewport.addEventListener('touchend', (e) => {
+      if (touchStartX === null) return;
+      const deltaX = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(deltaX) > 40) {
+        if (deltaX < 0) next(); else prev();
+        restartAutoplay();
+      }
+      touchStartX = null;
+    }, { passive: true });
+
+    function startAutoplay() {
+      if (reduceMotion || autoplayId) return;
+      autoplayId = window.setInterval(next, 4800);
+    }
+    function stopAutoplay() {
+      if (autoplayId) { window.clearInterval(autoplayId); autoplayId = null; }
+    }
+    function restartAutoplay() { stopAutoplay(); startAutoplay(); }
+
+    viewport.addEventListener('mouseenter', stopAutoplay);
+    viewport.addEventListener('mouseleave', startAutoplay);
+    viewport.addEventListener('focusin', stopAutoplay);
+    viewport.addEventListener('focusout', startAutoplay);
+
+    // Só roda o autoplay enquanto o carrossel está visível na tela
+    const screensIO = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) startAutoplay(); else stopAutoplay();
+      });
+    }, { threshold: 0.3 });
+    screensIO.observe(viewport);
+
+    layout();
+  })();
 })();
