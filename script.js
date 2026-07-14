@@ -973,6 +973,41 @@
      Navegação circular (sem fim), autoplay que pausa ao
      interagir, swipe no touch e setas do teclado. Sem libs.
   ========================================================= */
+  /* Lightbox de zoom para as telas reais do painel (carrossel de screens) */
+  const screenLightbox = document.getElementById('screen-lightbox');
+  const screenLightboxImg = document.getElementById('screen-lightbox-img');
+  const screenLightboxCaption = document.getElementById('screen-lightbox-caption');
+  const screenLightboxClose = document.getElementById('screen-lightbox-close');
+  let lastLightboxTrigger = null;
+
+  function openScreenLightbox(imgEl, captionText, triggerEl) {
+    if (!screenLightbox || !screenLightboxImg || !imgEl) return;
+    screenLightboxImg.src = imgEl.getAttribute('src');
+    screenLightboxImg.alt = imgEl.getAttribute('alt') || '';
+    if (screenLightboxCaption) screenLightboxCaption.textContent = captionText || '';
+    lastLightboxTrigger = triggerEl || null;
+    screenLightbox.classList.add('active');
+    screenLightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    screenLightboxClose?.focus();
+  }
+  function closeScreenLightbox() {
+    if (!screenLightbox) return;
+    screenLightbox.classList.remove('active');
+    screenLightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    lastLightboxTrigger?.focus();
+  }
+  if (screenLightbox) {
+    screenLightboxClose?.addEventListener('click', closeScreenLightbox);
+    screenLightbox.addEventListener('click', (e) => {
+      if (e.target === screenLightbox) closeScreenLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && screenLightbox.classList.contains('active')) closeScreenLightbox();
+    });
+  }
+
   function initScreensCarousel(root) {
     const viewport = root.querySelector('.screens-viewport');
     const track = root.querySelector('.screens-track');
@@ -1020,6 +1055,7 @@
         card.style.zIndex = String(z);
         card.style.filter = blur ? `blur(${blur}px)` : 'none';
         card.style.pointerEvents = pointer;
+        card.classList.toggle('is-active', i === active);
       });
       dots.forEach((dot, i) => dot.classList.toggle('active', i === active));
     }
@@ -1034,7 +1070,14 @@
 
     if (reduceMotion) cards.forEach(card => card.classList.add('no-anim'));
 
-    cards.forEach((card, i) => card.addEventListener('click', () => { if (i !== active) goTo(i); }));
+    cards.forEach((card, i) => card.addEventListener('click', () => {
+      if (i !== active) { goTo(i); return; }
+      const img = card.querySelector('.screen-body-img img');
+      if (img) {
+        const caption = card.querySelector('.screen-caption')?.textContent || '';
+        openScreenLightbox(img, caption, card);
+      }
+    }));
     if (prevBtn) prevBtn.addEventListener('click', () => { prev(); restartAutoplay(); });
     if (nextBtn) nextBtn.addEventListener('click', () => { next(); restartAutoplay(); });
 
