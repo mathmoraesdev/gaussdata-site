@@ -422,38 +422,36 @@
         </div>
       </div>
 
-      <!-- ================= PAINEL 2 — EXEMPLO, SUBSTITUIR PELO PRÓXIMO CLIENTE AUTORIZADO =================
-           Tudo abaixo é placeholder ilustrativo (accent violeta, pra ficar visualmente
-           diferente do azul do GCM). Troque case-tag, título, descrição, stats e as
-           4 telas do carrossel pelo case real assim que tiver autorização do cliente. -->
-      <div class="case-panel" data-client="cliente-2" data-accent="violet" role="tabpanel" hidden>
+      <!-- ================= PAINEL 2 — ROSA DE SARÓN (caso real, autorizado) ================= -->
+      <div class="case-panel" data-client="rosa-saron" data-accent="violet" role="tabpanel" hidden>
         <div class="case-card reveal tilt">
           <div class="case-card-main">
-            <span class="case-tag mono">Cliente 2 — exemplo</span>
-            <h3>[Título do case: qual problema esse painel resolveu]</h3>
-            <p class="case-desc">[Descrição curta do cliente, do problema que ele tinha antes e do que a Gauss Data estruturou. Mesmo tom do case do GCM: contexto → o que foi feito → resultado.]</p>
+            <span class="case-tag mono">Rosa de Sarón</span>
+            <h3>Instagram e vendas num só painel, sem precisar abrir cinco abas pra saber o que está funcionando</h3>
+            <p class="case-desc">A Rosa de Sarón acompanhava pedidos, estoque e o desempenho do Instagram de forma solta — cada informação num lugar, sem cruzar dados pra saber quais kits, campanhas ou datas realmente traziam retorno. A Gauss Data estruturou um painel único, atualizado automaticamente, que junta evolução de seguidores, alcance e engajamento, sazonalidade de vendas e ranking de produtos lado a lado.</p>
             <div class="case-stats">
               <div class="case-stat">
-                <span class="case-stat-val mono">—</span>
-                <span class="case-stat-lbl">[métrica 1]</span>
+                <span class="case-stat-val mono" data-counter data-target="109" data-suffix="%">0</span>
+                <span class="case-stat-lbl">de crescimento em seguidores no período</span>
               </div>
               <div class="case-stat">
-                <span class="case-stat-val mono">—</span>
-                <span class="case-stat-lbl">[métrica 2]</span>
+                <span class="case-stat-val mono">R$ 8.940</span>
+                <span class="case-stat-lbl">em receita só com o kit mais vendido</span>
               </div>
               <div class="case-stat">
-                <span class="case-stat-val mono">—</span>
-                <span class="case-stat-lbl">[métrica 3]</span>
+                <span class="case-stat-val mono" data-counter data-target="7" data-suffix="">0</span>
+                <span class="case-stat-lbl">categorias de produto acompanhadas num painel só</span>
               </div>
             </div>
-            <p class="case-note">* Substituir por case real assim que houver autorização do cliente.</p>
+            <!-- SUBSTITUIR: quando tiver um depoimento real da gestora da Rosa de Sarón, trocar o bloco abaixo por uma citação direta e atribuída -->
+            <p class="case-note">* Case documentado a partir de operação real. Depoimento da gestora responsável pode ser incluído aqui mediante autorização.</p>
           </div>
         </div>
 
-        <!-- CARROSSEL DE TELAS — screenshots reais do painel entregue a este cliente,
+        <!-- CARROSSEL DE TELAS — screenshots reais do painel entregue à Rosa de Sarón,
              servidos como assets estáticos em assets/screens/ (sem base64). -->
         <div class="screens-carousel reveal">
-          <p class="screens-lead">Um retrato de como fica por dentro: telas reais do painel entregue a este cliente.</p>
+          <p class="screens-lead">Um retrato de como fica por dentro: telas reais do painel entregue à Rosa de Sarón.</p>
           <div class="screens-viewport">
             <div class="screens-track">
 
@@ -461,7 +459,7 @@
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
                   <div class="screen-body screen-body-img">
-                    <img src="assets/screens/rosa-visao-geral.webp" alt="Painel: visão geral com KPIs de seguidores, pedidos, ticket médio e produto em destaque" loading="lazy" width="2200" height="869">
+                    <img src="assets/screens/rosa-visao-geral.webp" alt="Painel Rosa de Sarón: visão geral com KPIs de seguidores, pedidos, ticket médio e produto em destaque" loading="lazy" width="2200" height="869">
                   </div>
                 </div>
                 <span class="screen-caption">Visão geral</span>
@@ -471,7 +469,7 @@
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
                   <div class="screen-body screen-body-img">
-                    <img src="assets/screens/rosa-evolucao-seguidores.webp" alt="Painel: evolução de seguidores ao longo do tempo" loading="lazy" width="2200" height="1160">
+                    <img src="assets/screens/rosa-evolucao-seguidores.webp" alt="Painel Rosa de Sarón: evolução de seguidores ao longo do tempo" loading="lazy" width="2200" height="1160">
                   </div>
                 </div>
                 <span class="screen-caption">Evolução de seguidores</span>
@@ -481,7 +479,7 @@
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
                   <div class="screen-body screen-body-img">
-                    <img src="assets/screens/rosa-alcance-engajamento.webp" alt="Painel: alcance e engajamento das publicações" loading="lazy" width="2200" height="1160">
+                    <img src="assets/screens/rosa-alcance-engajamento.webp" alt="Painel Rosa de Sarón: alcance e engajamento das publicações" loading="lazy" width="2200" height="1160">
                   </div>
                 </div>
                 <span class="screen-caption">Alcance e engajamento</span>
@@ -491,7 +489,7 @@
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
                   <div class="screen-body screen-body-img">
-                    <img src="assets/screens/rosa-ranking-posts.webp" alt="Painel: ranking dos posts com melhor desempenho" loading="lazy" width="2200" height="735">
+                    <img src="assets/screens/rosa-ranking-posts.webp" alt="Painel Rosa de Sarón: ranking dos posts com melhor desempenho" loading="lazy" width="2200" height="735">
                   </div>
                 </div>
                 <span class="screen-caption">Ranking de posts</span>
@@ -501,7 +499,7 @@
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
                   <div class="screen-body screen-body-img">
-                    <img src="assets/screens/rosa-sazonalidade-vendas.webp" alt="Painel: sazonalidade de vendas ao longo do ano" loading="lazy" width="2200" height="1422">
+                    <img src="assets/screens/rosa-sazonalidade-vendas.webp" alt="Painel Rosa de Sarón: sazonalidade de vendas ao longo do ano" loading="lazy" width="2200" height="1422">
                   </div>
                 </div>
                 <span class="screen-caption">Sazonalidade de vendas</span>
@@ -511,7 +509,7 @@
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
                   <div class="screen-body screen-body-img">
-                    <img src="assets/screens/rosa-ranking-receita.webp" alt="Painel: ranking de receita por produto" loading="lazy" width="2200" height="1422">
+                    <img src="assets/screens/rosa-ranking-receita.webp" alt="Painel Rosa de Sarón: ranking de receita por produto" loading="lazy" width="2200" height="1422">
                   </div>
                 </div>
                 <span class="screen-caption">Ranking de receita por produto</span>
@@ -645,7 +643,7 @@
          a troca de abas já é genérica para qualquer quantidade de clientes. -->
     <div class="case-tabs reveal" id="case-tabs" role="tablist" aria-label="Selecionar cliente">
       <button class="case-tab active" type="button" role="tab" aria-selected="true" data-client="gcm">GCM São Leopoldo</button>
-      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-2">Cliente 2</button>
+      <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="rosa-saron">Rosa de Sarón</button>
       <button class="case-tab" type="button" role="tab" aria-selected="false" data-client="cliente-3">Cliente 3</button>
     </div>
   </div>
