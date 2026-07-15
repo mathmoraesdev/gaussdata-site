@@ -1261,16 +1261,37 @@
     const tabs = Array.from(tabsWrap.querySelectorAll('.case-tab'));
     const panels = Array.from(panelsWrap.querySelectorAll('.case-panel'));
 
+    // Trava a altura do wrapper de painéis na maior altura entre os clientes.
+    // Sem isso, cada cliente tem texto/carrossel de tamanho um pouco diferente
+    // e trocar de aba muda a altura da seção — o que empurra a barra de abas
+    // (que fica abaixo dos painéis) e dá a sensação de "pulo" na tela,
+    // principalmente perceptível no mobile (onde o navegador também tenta
+    // rolar o botão tocado pra dentro da área visível).
+    function lockPanelsHeight() {
+      let max = 0;
+      panels.forEach(panel => {
+        const wasHidden = panel.hidden;
+        if (wasHidden) panel.hidden = false;
+        max = Math.max(max, panel.scrollHeight);
+        if (wasHidden) panel.hidden = true;
+      });
+      if (max > 0) panelsWrap.style.minHeight = max + 'px';
+    }
+    lockPanelsHeight();
+    window.addEventListener('load', lockPanelsHeight);
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(lockPanelsHeight).catch(() => {});
+    }
+    let resizeId = null;
+    window.addEventListener('resize', () => {
+      clearTimeout(resizeId);
+      resizeId = setTimeout(lockPanelsHeight, 200);
+    });
+
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         const client = tab.dataset.client;
         if (tab.classList.contains('active')) return;
-
-        // Os painéis ficam acima das abas, então se o painel novo tiver
-        // altura diferente do anterior, a barra de abas (e o resto da página
-        // abaixo dela) se desloca. Medimos a altura antes/depois e corrigimos
-        // o scroll na mesma proporção pra manter o ponto clicado fixo na tela.
-        const heightBefore = panelsWrap.offsetHeight;
 
         tabs.forEach(t => {
           const isActive = t === tab;
@@ -1284,15 +1305,10 @@
           panel.classList.toggle('active', isActive);
         });
 
-        const heightAfter = panelsWrap.offsetHeight;
-        const diff = heightAfter - heightBefore;
-        if (diff !== 0) {
-          const root = document.documentElement;
-          const prevBehavior = root.style.scrollBehavior;
-          root.style.scrollBehavior = 'auto';
-          window.scrollBy(0, diff);
-          root.style.scrollBehavior = prevBehavior;
-        }
+        // Tira o foco do botão pra impedir que o navegador (comum no mobile)
+        // tente rolar a página de novo pra "reencontrar" o elemento focado
+        // depois da troca de painel.
+        tab.blur();
 
         trackEvent('case_tab_click', { client });
       });
