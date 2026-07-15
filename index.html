@@ -450,23 +450,18 @@
           </div>
         </div>
 
+        <!-- CARROSSEL DE TELAS — screenshots reais do painel entregue a este cliente,
+             servidos como assets estáticos em assets/screens/ (sem base64). -->
         <div class="screens-carousel reveal">
-          <p class="screens-lead">Um retrato de como fica por dentro: telas ilustrativas do tipo de painel entregue.</p>
+          <p class="screens-lead">Um retrato de como fica por dentro: telas reais do painel entregue a este cliente.</p>
           <div class="screens-viewport">
             <div class="screens-track">
 
               <div class="screen-card" data-screen="0">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <div class="screen-body">
-                    <div class="screen-kpis">
-                      <div class="screen-kpi"><div class="val">—</div><div class="lbl">[KPI 1]</div></div>
-                      <div class="screen-kpi"><div class="val cyan">—</div><div class="lbl">[KPI 2]</div></div>
-                      <div class="screen-kpi"><div class="val">—</div><div class="lbl">[KPI 3]</div></div>
-                    </div>
-                    <svg class="screen-chart" viewBox="0 0 260 70" preserveAspectRatio="none">
-                      <path d="M0,54 L26,44 L52,49 L78,28 L104,33 L130,18 L156,25 L182,10 L208,16 L234,6 L260,14" fill="none" stroke="#35d0f5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/rosa-visao-geral.webp" alt="Painel: visão geral com KPIs de seguidores, pedidos, ticket médio e produto em destaque" loading="lazy" width="2200" height="869">
                   </div>
                 </div>
                 <span class="screen-caption">Visão geral</span>
@@ -475,52 +470,51 @@
               <div class="screen-card" data-screen="1">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <div class="screen-body">
-                    <div class="screen-label">[Nome do gráfico 2]</div>
-                    <div class="pillar-row"><span class="pillar-name mono">Item 1</span><span class="bar-track"><span class="bar-fill" style="width:80%"></span></span></div>
-                    <div class="pillar-row"><span class="pillar-name mono">Item 2</span><span class="bar-track"><span class="bar-fill" style="width:60%"></span></span></div>
-                    <div class="pillar-row"><span class="pillar-name mono">Item 3</span><span class="bar-track"><span class="bar-fill" style="width:40%"></span></span></div>
-                    <div class="pillar-row"><span class="pillar-name mono">Item 4</span><span class="bar-track"><span class="bar-fill" style="width:25%"></span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/rosa-evolucao-seguidores.webp" alt="Painel: evolução de seguidores ao longo do tempo" loading="lazy" width="2200" height="1160">
                   </div>
                 </div>
-                <span class="screen-caption">[Legenda da tela 2]</span>
+                <span class="screen-caption">Evolução de seguidores</span>
               </div>
 
               <div class="screen-card" data-screen="2">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <div class="screen-body">
-                    <div class="screen-label">[Nome do gráfico 3]</div>
-                    <div class="screen-table">
-                      <div class="screen-table-row head"><span>Col 1</span><span>Col 2</span><span>Col 3</span><span>Col 4</span></div>
-                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
-                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
-                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
-                      <div class="screen-table-row"><span>—</span><span>—</span><span>—</span><span>—</span></div>
-                    </div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/rosa-alcance-engajamento.webp" alt="Painel: alcance e engajamento das publicações" loading="lazy" width="2200" height="1160">
                   </div>
                 </div>
-                <span class="screen-caption">[Legenda da tela 3]</span>
+                <span class="screen-caption">Alcance e engajamento</span>
               </div>
 
               <div class="screen-card" data-screen="3">
                 <div class="screen-frame">
                   <div class="screen-bar"><span></span><span></span><span></span></div>
-                  <div class="screen-body">
-                    <div class="screen-label">[Nome do gráfico 4]</div>
-                    <div class="screen-chips">
-                      <span class="screen-chip">[filtro 1]</span>
-                      <span class="screen-chip">[filtro 2]</span>
-                      <span class="screen-chip">[filtro 3]</span>
-                      <span class="screen-chip">[filtro 4]</span>
-                    </div>
-                    <div class="screen-export">
-                      <span class="screen-export-count mono">— registros</span>
-                      <span class="screen-export-btn">Exportar PDF</span>
-                    </div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/rosa-ranking-posts.webp" alt="Painel: ranking dos posts com melhor desempenho" loading="lazy" width="2200" height="735">
                   </div>
                 </div>
-                <span class="screen-caption">[Legenda da tela 4]</span>
+                <span class="screen-caption">Ranking de posts</span>
+              </div>
+
+              <div class="screen-card" data-screen="4">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/rosa-sazonalidade-vendas.webp" alt="Painel: sazonalidade de vendas ao longo do ano" loading="lazy" width="2200" height="1422">
+                  </div>
+                </div>
+                <span class="screen-caption">Sazonalidade de vendas</span>
+              </div>
+
+              <div class="screen-card" data-screen="5">
+                <div class="screen-frame">
+                  <div class="screen-bar"><span></span><span></span><span></span></div>
+                  <div class="screen-body screen-body-img">
+                    <img src="assets/screens/rosa-ranking-receita.webp" alt="Painel: ranking de receita por produto" loading="lazy" width="2200" height="1422">
+                  </div>
+                </div>
+                <span class="screen-caption">Ranking de receita por produto</span>
               </div>
 
             </div>
