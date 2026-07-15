@@ -100,7 +100,44 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
 }
 .nav-cta:hover{box-shadow:0 6px 22px rgba(53,208,245,0.28);}
 @media(max-width:1020px){.nav-links{gap:24px;}}
-@media(max-width:760px){.nav-links{display:none;}}
+
+/* HAMBÚRGUER — só existe em telas ≤760px */
+.nav-toggle{
+  display:none;
+  width:38px;height:38px;flex:none;
+  border:none;background:transparent;cursor:pointer;
+  flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  padding:0;
+}
+.nav-toggle span{
+  display:block;width:22px;height:2px;border-radius:2px;
+  background:var(--text-primary);
+  transition:transform .3s var(--ease-out-soft), opacity .25s ease;
+}
+.nav-toggle.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle.open span:nth-child(2){opacity:0;}
+.nav-toggle.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+@media(max-width:760px){
+  .nav-cta{display:none;}
+  .nav-toggle{display:flex;}
+  .nav-links{
+    position:absolute;top:100%;left:0;right:0;
+    flex-direction:column;gap:0;
+    background:rgba(5,8,16,0.97);
+    backdrop-filter:blur(14px) saturate(140%);
+    border-bottom:1px solid var(--line-soft);
+    padding:0 32px;margin:0;
+    max-height:0;overflow:hidden;
+    transition:max-height .35s var(--ease-out-soft);
+  }
+  .nav-links.open{max-height:420px;}
+  .nav-links a{
+    display:block;padding:15px 0;font-size:15px;
+    border-bottom:1px solid var(--line-soft);
+  }
+  .nav-links-wa{color:var(--cyan-bright)!important;font-weight:500;}
+}
 
 /* HERO */
 .hero{
@@ -474,6 +511,7 @@ section{padding:130px 0;position:relative;}
   perspective:1600px;
   display:flex;align-items:center;justify-content:center;
   touch-action:pan-y;
+  overflow:hidden;
 }
 .screens-track{position:relative;width:100%;height:100%;transform-style:preserve-3d;}
 .screen-card{
@@ -517,7 +555,7 @@ section{padding:130px 0;position:relative;}
 
 .screens-controls{display:flex;align-items:center;justify-content:center;gap:18px;margin-top:24px;}
 .screens-arrow{
-  width:38px;height:38px;border-radius:50%;
+  width:44px;height:44px;border-radius:50%;
   border:1px solid var(--line);background:transparent;color:var(--text-primary);
   font-size:18px;line-height:1;cursor:pointer;
   display:flex;align-items:center;justify-content:center;

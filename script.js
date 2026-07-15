@@ -368,6 +368,37 @@
   onScrollUpdate();
 
   /* =========================================================
+     7b. MENU MOBILE (HAMBÚRGUER)
+  ========================================================= */
+  const navToggle = document.getElementById('nav-toggle');
+  const navMenu = document.getElementById('nav-links');
+  if (navToggle && navMenu) {
+    const closeMenu = () => {
+      navToggle.classList.remove('open');
+      navMenu.classList.remove('open');
+      navToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    };
+    const openMenu = () => {
+      navToggle.classList.add('open');
+      navMenu.classList.add('open');
+      navToggle.setAttribute('aria-expanded', 'true');
+      document.body.style.overflow = 'hidden';
+    };
+    navToggle.addEventListener('click', () => {
+      const isOpen = navMenu.classList.contains('open');
+      if (isOpen) closeMenu(); else openMenu();
+    });
+    navMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeMenu();
+    });
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 760) closeMenu();
+    });
+  }
+
+  /* =========================================================
      8. NAV ATIVA CONFORME A SEÇÃO VISÍVEL
   ========================================================= */
   const navLinks = document.querySelectorAll('#nav-links a[data-nav]');
