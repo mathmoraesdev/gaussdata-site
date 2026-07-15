@@ -1266,6 +1266,12 @@
         const client = tab.dataset.client;
         if (tab.classList.contains('active')) return;
 
+        // Os painéis ficam acima das abas, então se o painel novo tiver
+        // altura diferente do anterior, a barra de abas (e o resto da página
+        // abaixo dela) se desloca. Medimos a altura antes/depois e corrigimos
+        // o scroll na mesma proporção pra manter o ponto clicado fixo na tela.
+        const heightBefore = panelsWrap.offsetHeight;
+
         tabs.forEach(t => {
           const isActive = t === tab;
           t.classList.toggle('active', isActive);
@@ -1277,6 +1283,16 @@
           panel.hidden = !isActive;
           panel.classList.toggle('active', isActive);
         });
+
+        const heightAfter = panelsWrap.offsetHeight;
+        const diff = heightAfter - heightBefore;
+        if (diff !== 0) {
+          const root = document.documentElement;
+          const prevBehavior = root.style.scrollBehavior;
+          root.style.scrollBehavior = 'auto';
+          window.scrollBy(0, diff);
+          root.style.scrollBehavior = prevBehavior;
+        }
 
         trackEvent('case_tab_click', { client });
       });
