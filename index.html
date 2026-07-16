@@ -17,7 +17,7 @@
 <meta property="og:image" content="https://gaussdata.com.br/og-cover.png">
 <meta name="twitter:card" content="summary_large_image">
 
-<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%232461ff'/%3E%3Cstop offset='100%25' stop-color='%2335d0f5'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cg transform='matrix(0.13986,0,0,-0.13986,-3.2867,99.3007)'%3E%3Cpath d='M528 480Q509 515 473.5 533.5Q438 552 390 552Q307 552 257.0 497.5Q207 443 207 352Q207 255 259.5 200.5Q312 146 404 146Q467 146 510.5 178.0Q554 210 574 270H357V396H729V237Q710 173 664.5 118.0Q619 63 549.0 29.0Q479 -5 391 -5Q287 -5 205.5 40.5Q124 86 78.5 167.0Q33 248 33 352Q33 456 78.5 537.5Q124 619 205.0 664.5Q286 710 390 710Q516 710 602.5 649.0Q689 588 717 480Z' fill='url(%23g)'/%3E%3C/g%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -52,35 +52,10 @@
 
 <div class="scroll-progress" aria-hidden="true"><span id="scroll-progress-bar"></span></div>
 
-<!-- Logo compartilhado via <symbol>, referenciado com <use> (sem base64) -->
-<svg width="0" height="0" style="position:absolute" aria-hidden="true">
-  <defs>
-    <linearGradient id="gauss-grad" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0%" stop-color="#2461ff"/>
-      <stop offset="100%" stop-color="#35d0f5"/>
-    </linearGradient>
-    <symbol id="gauss-logo" viewBox="0 0 100 100">
-      <g transform="matrix(0.13986,0,0,-0.13986,-3.2867,99.3007)">
-        <path d="M528 480Q509 515 473.5 533.5Q438 552 390 552Q307 552 257.0 497.5Q207 443 207 352Q207 255 259.5 200.5Q312 146 404 146Q467 146 510.5 178.0Q554 210 574 270H357V396H729V237Q710 173 664.5 118.0Q619 63 549.0 29.0Q479 -5 391 -5Q287 -5 205.5 40.5Q124 86 78.5 167.0Q33 248 33 352Q33 456 78.5 537.5Q124 619 205.0 664.5Q286 710 390 710Q516 710 602.5 649.0Q689 588 717 480Z" fill="url(#gauss-grad)"/>
-      </g>
-      <g opacity="0.5" stroke="#bfe9ff" stroke-width="1" fill="#bfe9ff">
-        <line x1="68.9" y1="33.6" x2="72.9" y2="8.6"/>
-        <line x1="28.2" y1="56.7" x2="13" y2="23.1"/>
-        <line x1="81.5" y1="85.3" x2="19.7" y2="84.6"/>
-        <circle cx="68.9" cy="33.6" r="2.8"/>
-        <circle cx="72.9" cy="8.6" r="2.8"/>
-        <circle cx="13" cy="23.1" r="2.8"/>
-        <circle cx="19.7" cy="84.6" r="2.8"/>
-        <circle cx="81.5" cy="85.3" r="2.8"/>
-      </g>
-    </symbol>
-  </defs>
-</svg>
-
 <header id="site-header">
   <nav>
     <div class="brand">
-      <svg><use href="#gauss-logo"/></svg>
+      <img src="assets/logo.png" alt="Gauss Data" width="24" height="24">
       <span>GAUSS DATA</span>
     </div>
     <div class="nav-links" id="nav-links">
@@ -105,7 +80,7 @@
     <div>
       <div class="eyebrow load-in" style="--d:0">Consultoria em dados · Operações críticas</div>
       <h1 class="load-in" style="--d:1">Do caos operacional<br>ao <span class="grad">dado que decide.</span></h1>
-      <p class="load-in" style="--d:2">A Gauss Data transforma planilhas soltas e sistemas dispersos em dashboards, diagnósticos e automações, construídos por quem também vive a rotina operacional, não só por quem lê o relatório no fim do mês.</p>
+      <p class="load-in" style="--d:2">Dashboards, diagnósticos e automações que tiram sua operação das planilhas soltas e colocam o dado pra decidir por você.</p>
       <div class="cta-row load-in" style="--d:3">
         <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20a%20Gauss%20Data" class="btn btn-primary magnetic" target="_blank" rel="noopener">Falar no WhatsApp →</a>
         <a href="#scan" class="btn btn-ghost magnetic">Ver o Gauss Scan</a>
@@ -172,7 +147,7 @@
           <div class="case-card-main">
             <span class="case-tag mono">GCM São Leopoldo</span>
             <h3>Painel de ocorrências, do registro bruto à decisão operacional</h3>
-            <p class="case-desc">A Gauss Data estruturou os dados de ocorrências da Guarda Civil Municipal de São Leopoldo em um painel interno, atualizado automaticamente, substituindo a compilação manual pela leitura direta do indicador. Mais de 20.000 ocorrências já foram organizadas e são acompanhadas por ele.</p>
+            <p class="case-desc">Painel interno da GCM São Leopoldo, atualizado automaticamente. Fim da compilação manual: mais de 20.000 ocorrências já organizadas e acompanhadas por ele.</p>
             <div class="case-stats">
               <div class="case-stat">
                 <span class="case-stat-val mono" data-counter data-target="6" data-suffix="+">0</span>
@@ -276,7 +251,7 @@
           <div class="case-card-main">
             <span class="case-tag mono">Rosa de Saron</span>
             <h3>Instagram e vendas num só painel, sem precisar abrir cinco abas pra saber o que está funcionando</h3>
-            <p class="case-desc">A Rosa de Saron acompanhava pedidos, estoque e o desempenho do Instagram de forma solta, cada informação num lugar, sem cruzar dados pra saber quais kits, campanhas ou datas realmente traziam retorno. A Gauss Data estruturou um painel único, atualizado automaticamente, que junta evolução de seguidores, alcance e engajamento, sazonalidade de vendas e ranking de produtos lado a lado.</p>
+            <p class="case-desc">Pedidos, estoque e Instagram viviam espalhados, sem cruzar dado pra saber o que realmente vendia. Hoje é um painel só, atualizado sozinho, com seguidores, vendas e ranking de produtos lado a lado.</p>
             <div class="case-stats">
               <div class="case-stat">
                 <span class="case-stat-val mono" data-counter data-target="109" data-suffix="%">0</span>
@@ -468,40 +443,6 @@
   </div>
 </section>
 
-<section id="teste-maturidade" class="quiz-section">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <span class="eyebrow" style="margin-bottom:14px;">Teste rápido · 4 perguntas</span>
-      <h2>Qual a maturidade de dados da sua operação?</h2>
-      <p>Um preview de 30 segundos do que o Gauss Scan analisa a fundo, em seis pilares. Sem cadastro, sem compromisso.</p>
-    </div>
-    <div class="quiz-card reveal tilt" id="quiz-card">
-      <div class="quiz-head">
-        <span class="dash-label" id="quiz-step-label">Pergunta 1 de 4</span>
-        <div class="quiz-dots" id="quiz-dots" aria-hidden="true"></div>
-      </div>
-      <div class="quiz-body" id="quiz-body"></div>
-      <div class="quiz-result" id="quiz-result" hidden>
-        <div class="quiz-gauge">
-          <svg viewBox="0 0 120 120">
-            <circle class="quiz-gauge-track" cx="60" cy="60" r="52"/>
-            <circle class="quiz-gauge-fill" id="quiz-gauge-fill" cx="60" cy="60" r="52"/>
-          </svg>
-          <div class="quiz-gauge-label">
-            <span class="quiz-gauge-num" id="quiz-score">0%</span>
-            <span class="quiz-gauge-txt">maturidade</span>
-          </div>
-        </div>
-        <h3 id="quiz-result-title">Resultado</h3>
-        <p id="quiz-result-desc"></p>
-        <div class="quiz-result-bars" id="quiz-result-bars"></div>
-        <a href="#" class="btn btn-primary magnetic" id="quiz-cta" target="_blank" rel="noopener">Quero o diagnóstico completo →</a>
-        <button class="quiz-restart" id="quiz-restart" type="button">Refazer teste</button>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section id="metodo" class="mesh-2">
   <div class="wrap">
     <div class="method-wrap">
@@ -547,6 +488,40 @@
   </div>
 </section>
 
+<section id="teste-maturidade" class="quiz-section">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow" style="margin-bottom:14px;">Teste rápido · 4 perguntas</span>
+      <h2>Qual a maturidade de dados da sua operação?</h2>
+      <p>Um preview de 30 segundos do que o Gauss Scan analisa a fundo, em seis pilares. Sem cadastro, sem compromisso.</p>
+    </div>
+    <div class="quiz-card reveal tilt" id="quiz-card">
+      <div class="quiz-head">
+        <span class="dash-label" id="quiz-step-label">Pergunta 1 de 4</span>
+        <div class="quiz-dots" id="quiz-dots" aria-hidden="true"></div>
+      </div>
+      <div class="quiz-body" id="quiz-body"></div>
+      <div class="quiz-result" id="quiz-result" hidden>
+        <div class="quiz-gauge">
+          <svg viewBox="0 0 120 120">
+            <circle class="quiz-gauge-track" cx="60" cy="60" r="52"/>
+            <circle class="quiz-gauge-fill" id="quiz-gauge-fill" cx="60" cy="60" r="52"/>
+          </svg>
+          <div class="quiz-gauge-label">
+            <span class="quiz-gauge-num" id="quiz-score">0%</span>
+            <span class="quiz-gauge-txt">maturidade</span>
+          </div>
+        </div>
+        <h3 id="quiz-result-title">Resultado</h3>
+        <p id="quiz-result-desc"></p>
+        <div class="quiz-result-bars" id="quiz-result-bars"></div>
+        <a href="#" class="btn btn-primary magnetic" id="quiz-cta" target="_blank" rel="noopener">Quero o diagnóstico completo →</a>
+        <button class="quiz-restart" id="quiz-restart" type="button">Refazer teste</button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="faq" class="faq-section">
   <div class="wrap">
     <div class="section-head reveal">
@@ -560,7 +535,7 @@
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-a">
-          <p>É um diagnóstico gratuito de maturidade de dados em seis pilares, feito a partir de informações que você mesmo preenche. Você recebe um relatório em PDF com nota, pontos de atenção e recomendações, sem custo e sem compromisso. A partir dele, propomos os próximos passos se fizer sentido para sua operação.</p>
+          <p>É um diagnóstico gratuito de maturidade de dados em seis pilares. Você recebe um relatório em PDF com nota, pontos de atenção e recomendações, sem custo e sem compromisso.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -569,7 +544,7 @@
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-a">
-          <p>Não. A maioria dos nossos clientes ainda opera majoritariamente em planilhas e não tem uma equipe técnica dedicada. Cuidamos da estrutura, da automação e da manutenção; sua equipe usa o painel, não precisa mantê-lo.</p>
+          <p>Não. A maioria dos nossos clientes ainda opera majoritariamente em planilhas, sem equipe técnica dedicada. Cuidamos da estrutura, automação e manutenção; sua equipe só usa o painel.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -578,7 +553,7 @@
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-a">
-          <p>Varia com a complexidade das fontes de dados, mas o fluxo (diagnóstico, estrutura, entrega, acompanhamento) costuma ser conduzido em semanas, não meses. Definimos um prazo real na conversa inicial, depois de entender suas fontes.</p>
+          <p>Varia com a complexidade das fontes de dados, mas o fluxo completo costuma ser conduzido em semanas, não meses. O prazo real é definido na conversa inicial.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -587,7 +562,7 @@
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-a">
-          <p>Sim. Segurança e boas práticas fazem parte do processo desde o diagnóstico inicial, não são um item avulso adicionado depois. Analisamos exposição de dados e vulnerabilidades como parte padrão da entrega.</p>
+          <p>Sim. Segurança e boas práticas fazem parte do processo desde o diagnóstico inicial, não são um item avulso adicionado depois.</p>
         </div>
       </div>
       <div class="faq-item">
@@ -596,7 +571,7 @@
           <span class="faq-icon" aria-hidden="true"></span>
         </button>
         <div class="faq-a">
-          <p>Oferecemos um plano de suporte mensal recorrente para ajustes, novos indicadores e manutenção contínua. Você também pode optar por assumir a manutenção internamente; documentamos tudo para isso.</p>
+          <p>Oferecemos um plano de suporte mensal recorrente. Se preferir assumir a manutenção internamente, documentamos tudo para isso.</p>
         </div>
       </div>
     </div>
@@ -660,7 +635,7 @@
     <div class="footer-top">
       <div class="footer-about">
         <div class="footer-brand">
-          <svg><use href="#gauss-logo"/></svg>
+          <img src="assets/logo.png" alt="Gauss Data" width="22" height="22">
           <span>GAUSS DATA</span>
         </div>
         <p>Consultoria em dados para operações que não podem parar. Diagnóstico, dashboards e automação, construídos por quem vive a rotina.</p>

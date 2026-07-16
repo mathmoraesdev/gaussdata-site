@@ -80,7 +80,7 @@ nav{display:flex;align-items:center;justify-content:space-between;padding:20px 3
 .nav-links a.active{color:var(--text-primary);}
 .nav-links a.active::after{width:100%;}
 .brand{display:flex;align-items:center;gap:10px;}
-.brand svg{width:24px;height:24px;display:block;}
+.brand img{width:24px;height:24px;display:block;}
 .brand span{font-size:14px;font-weight:600;letter-spacing:0.1em;}
 .nav-links{display:flex;gap:38px;font-size:13.5px;color:var(--text-muted);}
 .nav-links a{transition:color .25s ease;position:relative;}
@@ -703,7 +703,7 @@ footer .wrap{position:relative;z-index:1;}
 }
 .footer-about{display:flex;flex-direction:column;gap:14px;}
 .footer-about .footer-brand{display:flex;align-items:center;gap:10px;}
-.footer-about .footer-brand svg{width:22px;height:22px;display:block;}
+.footer-about .footer-brand img{width:22px;height:22px;display:block;}
 .footer-about .footer-brand span{font-size:14px;font-weight:600;letter-spacing:0.08em;}
 .footer-about p{font-size:13.5px;color:var(--text-muted);line-height:1.6;max-width:280px;}
 .footer-col h4{font-size:12px;letter-spacing:0.1em;text-transform:uppercase;color:var(--text-dim);margin-bottom:16px;}
