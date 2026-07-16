@@ -367,35 +367,6 @@
   </div>
 </section>
 
-<section id="porque" class="mesh-1">
-  <div class="wrap">
-    <div class="section-head reveal">
-      <h2>Feita para quem lida com dados de verdade, todo dia.</h2>
-      <p>Não é consultoria de slide. É construída na prática de quem trata dado bruto, prazo curto e sistema que trava.</p>
-    </div>
-    <div class="why-grid reveal">
-      <div class="why-card feature tilt">
-        <span class="num-bg" aria-hidden="true">01</span>
-        <span class="num mono">01</span>
-        <h3>Experiência de campo</h3>
-        <p>Quem monta o dashboard também mexe na planilha de ocorrência todo dia. O que entra no relatório é o que realmente importa na rotina operacional, não o que parece bem numa demonstração.</p>
-      </div>
-      <div class="why-card tilt">
-        <span class="num-bg" aria-hidden="true">02</span>
-        <span class="num mono">02</span>
-        <h3>Dado como sistema</h3>
-        <p>Nada de arquivo avulso. Cada entrega se conecta a um fluxo, da coleta ao relatório, sem retrabalho manual.</p>
-      </div>
-      <div class="why-card tilt">
-        <span class="num-bg" aria-hidden="true">03</span>
-        <span class="num mono">03</span>
-        <h3>Segurança desde o início</h3>
-        <p>Diagnóstico de maturidade e boas práticas fazem parte do processo desde o primeiro dia, não são um item à parte.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="services" id="servicos">
   <div class="wrap">
     <div class="section-head right reveal">
@@ -522,6 +493,51 @@
   </div>
 </section>
 
+<section class="cta-final" id="scan">
+  <div class="wrap">
+    <div class="cta-final-grid">
+      <div class="reveal">
+        <h2>Pronto para ver seus dados com clareza?</h2>
+        <p>Comece pelo Gauss Scan: um diagnóstico direto da maturidade de dados da sua operação, com relatório em PDF. Deixe seu contato e falamos no WhatsApp com o diagnóstico já direcionado pro seu caso.</p>
+        <div class="cta-row">
+          <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20pelo%20Gauss%20Scan" class="btn btn-ghost magnetic">Prefiro chamar direto →</a>
+        </div>
+      </div>
+      <form class="lead-form reveal tilt" id="lead-form" novalidate>
+        <div class="lead-form-head">
+          <span class="dash-label">Fale com a Gauss Data</span>
+          <div class="dash-dots"><span></span><span></span><span></span></div>
+        </div>
+        <div class="lead-field">
+          <label for="lead-name">Nome</label>
+          <input type="text" id="lead-name" name="name" autocomplete="name" placeholder="Seu nome" required>
+          <span class="lead-error" data-error-for="lead-name"></span>
+        </div>
+        <div class="lead-field">
+          <label for="lead-phone">WhatsApp</label>
+          <input type="tel" id="lead-phone" name="phone" autocomplete="tel" inputmode="numeric" maxlength="16" placeholder="(51) 9XXXX-XXXX" required>
+          <span class="lead-error" data-error-for="lead-phone"></span>
+        </div>
+        <div class="lead-field">
+          <label for="lead-challenge">Maior desafio com dados hoje <span class="opt">(opcional)</span></label>
+          <textarea id="lead-challenge" name="challenge" rows="2" placeholder="Ex: planilhas soltas, relatório manual, sem visão em tempo real..."></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary magnetic lead-submit">
+          <span class="lead-submit-label">Quero meu diagnóstico →</span>
+        </button>
+        <p class="lead-hint">Ao enviar, abrimos o WhatsApp com sua mensagem pronta. Nada é enviado sem você confirmar.</p>
+        <div class="lead-success">
+          <div class="lead-success-icon" aria-hidden="true">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#35d0f5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h4>Prontinho, <span id="lead-success-name">tudo certo</span>!</h4>
+          <p>Abrimos o WhatsApp numa nova aba com sua mensagem pronta. Se não abriu, <a href="#" id="lead-fallback-link" target="_blank" rel="noopener" style="color:var(--cyan-bright);">clique aqui</a>.</p>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
 <section id="faq" class="faq-section">
   <div class="wrap">
     <div class="section-head reveal">
@@ -574,51 +590,6 @@
           <p>Oferecemos um plano de suporte mensal recorrente. Se preferir assumir a manutenção internamente, documentamos tudo para isso.</p>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<section class="cta-final" id="scan">
-  <div class="wrap">
-    <div class="cta-final-grid">
-      <div class="reveal">
-        <h2>Pronto para ver seus dados com clareza?</h2>
-        <p>Comece pelo Gauss Scan: um diagnóstico direto da maturidade de dados da sua operação, com relatório em PDF. Deixe seu contato e falamos no WhatsApp com o diagnóstico já direcionado pro seu caso.</p>
-        <div class="cta-row">
-          <a href="https://wa.me/5551993368040?text=Ol%C3%A1%2C%20quero%20come%C3%A7ar%20pelo%20Gauss%20Scan" class="btn btn-ghost magnetic">Prefiro chamar direto →</a>
-        </div>
-      </div>
-      <form class="lead-form reveal tilt" id="lead-form" novalidate>
-        <div class="lead-form-head">
-          <span class="dash-label">Fale com a Gauss Data</span>
-          <div class="dash-dots"><span></span><span></span><span></span></div>
-        </div>
-        <div class="lead-field">
-          <label for="lead-name">Nome</label>
-          <input type="text" id="lead-name" name="name" autocomplete="name" placeholder="Seu nome" required>
-          <span class="lead-error" data-error-for="lead-name"></span>
-        </div>
-        <div class="lead-field">
-          <label for="lead-phone">WhatsApp</label>
-          <input type="tel" id="lead-phone" name="phone" autocomplete="tel" inputmode="numeric" maxlength="16" placeholder="(51) 9XXXX-XXXX" required>
-          <span class="lead-error" data-error-for="lead-phone"></span>
-        </div>
-        <div class="lead-field">
-          <label for="lead-challenge">Maior desafio com dados hoje <span class="opt">(opcional)</span></label>
-          <textarea id="lead-challenge" name="challenge" rows="2" placeholder="Ex: planilhas soltas, relatório manual, sem visão em tempo real..."></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary magnetic lead-submit">
-          <span class="lead-submit-label">Quero meu diagnóstico →</span>
-        </button>
-        <p class="lead-hint">Ao enviar, abrimos o WhatsApp com sua mensagem pronta. Nada é enviado sem você confirmar.</p>
-        <div class="lead-success">
-          <div class="lead-success-icon" aria-hidden="true">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="#35d0f5" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <h4>Prontinho, <span id="lead-success-name">tudo certo</span>!</h4>
-          <p>Abrimos o WhatsApp numa nova aba com sua mensagem pronta. Se não abriu, <a href="#" id="lead-fallback-link" target="_blank" rel="noopener" style="color:var(--cyan-bright);">clique aqui</a>.</p>
-        </div>
-      </form>
     </div>
   </div>
 </section>
